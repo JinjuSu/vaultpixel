@@ -1,0 +1,38 @@
+[
+  {
+    "name": "Ledger Nano S Plus",
+    "price": "199.99",
+    "description": "Secure your cryptocurrency with the Ledger Nano S Plus, featuring robust security features, a larger screen for improved usability, and increased storage for a wide range of crypto assets.",
+    "image": "../assets/wallets/Ledger_Nano_S_Plus.png"
+  },
+  {
+    "name": "Ballet Real Ethereum",
+    "price": "$188.53",
+    "description": "Secure and manage your crypto assets with this state-of-the-art hardware wallet that offers top-notch security features, user-friendly interface, and compatibility with multiple cryptocurrencies.",
+    "image": "../assets/wallets/Ballet_Real_Ethereum.png"
+  },
+  {
+    "name": "D'Cent",
+    "price": "$228.05",
+    "description": "Secure and manage your crypto assets with this state-of-the-art hardware wallet that offers top-notch security features, user-friendly interface, and compatibility with multiple cryptocurrencies.",
+    "image": "../assets/wallets/D'Cent_webp"
+  },
+  {
+    "name": "ELLIPAL Titain mini-1",
+    "price": "$268.60",
+    "description": "Secure and manage your crypto assets with this state-of-the-art hardware wallet that offers top-notch security features, user-friendly interface, and compatibility with multiple cryptocurrencies.",
+    "image": "../assets/wallets/ELLIPAL_Titain_mini-1.webp"
+  },
+  {
+    "name": "ELLIPAL Titain mini-2",
+    "price": "$168.96",
+    "description": "Secure and manage your crypto assets with this state-of-the-art hardware wallet that offers top-notch security features, user-friendly interface, and compatibility with multiple cryptocurrencies.",
+    "image": "../assets/wallets/ELLIPAL_Titain_mini-2.png"
+  },
+  {
+    "name": "ELLIPAL Titain mini-3",
+    "price": "$151.11",
+    "description": "Secure and manage your crypto assets with this state-of-the-art hardware wallet that offers top-notch security features, user-friendly interface, and compatibility with multiple cryptocurrencies.",
+    "image": "../assets/wallets/ELLIPAL_Titain_mini-3.png"
+  }
+]
