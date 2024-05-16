@@ -14,9 +14,7 @@
           <router-link to="/products">Products</router-link>
         </MDBNavbarItem>
         <MDBNavbarItem href="#">
-          <router-link to="/products"
-            ><router-link to="/about">About</router-link></router-link
-          >
+          <router-link to="/about">About</router-link>
         </MDBNavbarItem>
         <MDBNavbarItem>
           <!-- Navbar dropdown -->
@@ -49,7 +47,7 @@
       <MDBBtn color="dark">Sign up</MDBBtn>
       <MDBBtn outline="dark">Log in</MDBBtn>
       <MDBBtn color="light"
-        ><router-link to="/about"
+        ><router-link to="/cart"
           ><img
             class="image-icon-cart"
             src="../assets/icons/cart-item-icon.png" /></router-link
