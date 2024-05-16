@@ -108,30 +108,16 @@
         </div>
       </div>
       <!-- Product column 3 cards per row -->
-      <div class="col-9">
+      <div class="col">
         <div class="row">
-          <div class="col">
-            <div class="card">
-              <div
-                class="bg-image hover-overlay"
-                data-mdb-ripple-init
-                data-mdb-ripple-color="light"
-              >
-                <img
-                  src="../assets/wallets/Ledger_Nano_S.webp"
-                  class="img-fluid"
-                />
-                <a href="#!">
-                  <div
-                    class="mask"
-                    style="background-color: rgba(251, 251, 251, 0.15)"
-                  ></div>
-                </a>
+          <div class="col-4" v-for="product in products" :key="product.id">
+            <div class="card grid-wrap">
+              <div class="card-header text-center">
+                <img class="image-product" :src="product.image" />
               </div>
               <div class="card-body">
-                <h5 class="card-title">Ledger Nano S</h5>
-                <p class="card-text">AU$ 299.99</p>
-                <p class="text-warning">rating stars</p>
+                <h5 class="card-title">{{ product.name }}</h5>
+                <p class="card-text">{{ product.price }}</p>
                 <a
                   href="#!"
                   class="btn btn-sm btn-dark button-shop"
@@ -141,8 +127,6 @@
               </div>
             </div>
           </div>
-          <div class="col"><h3>card 2 let vue fetch it by loop</h3></div>
-          <div class="col"><h3>card 2 let vue fetch it by loop</h3></div>
         </div>
       </div>
     </div>
@@ -170,9 +154,16 @@ import {
   MDBPageItem,
 } from "mdb-vue-ui-kit";
 import { ref } from "vue";
+import { products } from "../assets/products.js";
 
 export default {
   name: "About",
+  data() {
+    return {
+      products,
+      test: "test",
+    };
+  },
   components: {
     MDBContainer,
     MDBCollapse,
@@ -185,7 +176,6 @@ export default {
   },
   setup() {
     const search7 = ref("");
-
     const collapse1 = ref(false);
     const collapse2 = ref(false);
     const collapse3 = ref(false);
