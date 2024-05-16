@@ -36,3 +36,9 @@
   flex-wrap: wrap;
   margin-top: 16px;
 }
+
+.link-text {
+  color: black;
+  font-weight: semi-bold;
+  text-decoration-line: none;
+}

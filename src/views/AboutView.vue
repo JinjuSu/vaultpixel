@@ -1,5 +1,5 @@
 <template>
-  <MDBContainer class="my-5"><h1>This is about page</h1></MDBContainer>
+  <MDBContainer class="my-5"><h1>This is About page</h1></MDBContainer>
 </template>
 
 <script>

@@ -8,13 +8,13 @@
     <MDBCollapse v-model="collapse1" id="navbarSupportedContent">
       <MDBNavbarNav class="mb-2 mb-lg-0">
         <MDBNavbarItem to="#" active>
-          <router-link to="/">Home</router-link>
+          <router-link class="link-text" to="/">Home</router-link>
         </MDBNavbarItem>
         <MDBNavbarItem href="#">
-          <router-link to="/products">Products</router-link>
+          <router-link class="link-text" to="/products">Products</router-link>
         </MDBNavbarItem>
         <MDBNavbarItem href="#">
-          <router-link to="/about">About</router-link>
+          <router-link class="link-text" to="/about">About</router-link>
         </MDBNavbarItem>
         <MDBNavbarItem>
           <!-- Navbar dropdown -->
