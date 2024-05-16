@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <h1>This is about page</h1>
     <div class="container my-5">
       <!-- Search bar -->
       <MDBInput class="mb-4" v-model="search7" placeholder="search" />
@@ -19,11 +20,21 @@
                     aria-controls="fliter-type"
                     :aria-expanded="collapse1"
                   >
-                    <img
-                      src="../assets/icons/arrow-icon-up.webp"
-                      alt="arrow-up"
-                      class="image-icon"
-                  /></MDBBtn>
+                    <div v-if="!collapse1">
+                      <img
+                        src="../assets/icons/arrow-icon-up.webp"
+                        alt="arrow-up"
+                        class="image-icon"
+                      />
+                    </div>
+                    <div v-if="collapse1">
+                      <img
+                        src="../assets/icons/arrow-icon-right.png"
+                        alt="arrow-up"
+                        class="image-icon"
+                      />
+                    </div>
+                  </MDBBtn>
                 </div>
               </div>
             </div>
@@ -42,11 +53,21 @@
                     aria-controls="filter-brand"
                     :aria-expanded="collapse2"
                   >
-                    <img
-                      src="../assets/icons/arrow-icon-up.webp"
-                      alt="arrow-up"
-                      class="image-icon"
-                  /></MDBBtn>
+                    <div v-if="!collapse2">
+                      <img
+                        src="../assets/icons/arrow-icon-up.webp"
+                        alt="arrow-up"
+                        class="image-icon"
+                      />
+                    </div>
+                    <div v-else-if="collapse2">
+                      <img
+                        src="../assets/icons/arrow-icon-right.png"
+                        alt="arrow-up"
+                        class="image-icon"
+                      />
+                    </div>
+                  </MDBBtn>
                 </div>
               </div>
             </div>

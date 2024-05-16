@@ -1,6 +1,6 @@
 <template>
   <MDBNavbar expand="lg" light bg="light" container>
-    <MDBNavbarBrand href="#">Brand</MDBNavbarBrand>
+    <MDBNavbarBrand href="#" class="fw-bold">VaultPixel</MDBNavbarBrand>
     <MDBNavbarToggler
       @click="collapse1 = !collapse1"
       target="#navbarSupportedContent"
@@ -37,7 +37,7 @@
         <MDBNavbarItem to="#" disabled> Disabled </MDBNavbarItem>
       </MDBNavbarNav>
       <!-- Search form -->
-      <form class="d-flex input-group w-auto">
+      <!-- <form class="d-flex input-group w-auto">
         <input
           type="search"
           class="form-control"
@@ -45,7 +45,9 @@
           aria-label="Search"
         />
         <MDBBtn outline="primary"> Search </MDBBtn>
-      </form>
+      </form> -->
+      <MDBBtn outline="primary">Log in</MDBBtn>
+      <MDBBtn outline="primary">Cart</MDBBtn>
     </MDBCollapse>
   </MDBNavbar>
   <!-- Default code -->
