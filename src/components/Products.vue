@@ -1,17 +1,8 @@
 <template>
-  <div class="container my-5">
-    <!-- Search bar -->
-    <div class="form-outline mb-4" data-mdb-input-init>
-      <input
-        type="search"
-        class="form-control border"
-        id="datatable-search-input"
-      />
-      <label class="form-label" for="datatable-search-input">Search</label>
-    </div>
-
-    <!-- Products list -->
-    <div>
+  <div class="container">
+    <div class="container my-5">
+      <!-- Search bar -->
+      <MDBInput class="mb-4" v-model="search7" placeholder="search" />
       <div class="row">
         <div class="col-3">
           <!-- Filter column -->
@@ -22,42 +13,69 @@
               <div class="col-auto me-auto">Type</div>
               <div class="col-auto">
                 <div type="button">
-                  <img
-                    src="../assets/icons/arrow-icon-up.webp"
-                    alt="arrow-up"
-                    class="image-icon"
-                  />
+                  <MDBBtn
+                    color="light"
+                    @click="collapse1 = !collapse1"
+                    aria-controls="fliter-type"
+                    :aria-expanded="collapse1"
+                  >
+                    <img
+                      src="../assets/icons/arrow-icon-up.webp"
+                      alt="arrow-up"
+                      class="image-icon"
+                  /></MDBBtn>
                 </div>
               </div>
             </div>
+            <MDBCollapse id="fliter-type" v-model="collapse1">
+              <div class="mt-3">Collapse 1: Price options</div>
+            </MDBCollapse>
             <hr />
             <!-- Filter by Brand -->
             <div class="row my-3">
               <div class="col-auto me-auto">Brand</div>
               <div class="col-auto">
                 <div type="button">
-                  <img
-                    src="../assets/icons/arrow-icon-up.webp"
-                    alt="arrow-up"
-                    class="image-icon"
-                  />
+                  <MDBBtn
+                    color="light"
+                    @click="collapse2 = !collapse2"
+                    aria-controls="filter-brand"
+                    :aria-expanded="collapse2"
+                  >
+                    <img
+                      src="../assets/icons/arrow-icon-up.webp"
+                      alt="arrow-up"
+                      class="image-icon"
+                  /></MDBBtn>
                 </div>
               </div>
             </div>
+            <MDBCollapse id="fliter-brand" v-model="collapse2">
+              <div class="mt-3">Collapse 2: Brand options</div>
+            </MDBCollapse>
             <hr />
             <!-- Filter by Price -->
             <div class="row my-2">
               <div class="col-auto me-auto">Price</div>
               <div class="col-auto">
                 <div type="button">
-                  <img
-                    src="../assets/icons/arrow-icon-up.webp"
-                    alt="arrow-up"
-                    class="image-icon"
-                  />
+                  <MDBBtn
+                    color="light"
+                    @click="collapse3 = !collapse3"
+                    aria-controls="fliter-price"
+                    :aria-expanded="collapse3"
+                  >
+                    <img
+                      src="../assets/icons/arrow-icon-up.webp"
+                      alt="arrow-up"
+                      class="image-icon"
+                  /></MDBBtn>
                 </div>
               </div>
             </div>
+            <MDBCollapse id="fliter-price" v-model="collapse3">
+              <div class="mt-3">Collapse 3: Price options</div>
+            </MDBCollapse>
           </div>
         </div>
         <!-- Product column 3 cards per row -->
@@ -71,7 +89,7 @@
                   data-mdb-ripple-color="light"
                 >
                   <img
-                    src="../assets/wallets/Ledger_Nano_X_WVRPS.webp"
+                    src="../assets/wallets/Ledger_Nano_S.webp"
                     class="img-fluid"
                   />
                   <a href="#!">
@@ -104,26 +122,41 @@
 </template>
 
 <script>
+import {
+  MDBContainer,
+  MDBCollapse,
+  MDBBtn,
+  MDBInput,
+  MDBAutocomplete,
+  MDBIcon,
+} from "mdb-vue-ui-kit";
+import { ref } from "vue";
+
 export default {
-  name: "ProductComp",
-  props: {},
+  name: "About",
+  components: {
+    MDBContainer,
+    MDBCollapse,
+    MDBBtn,
+    MDBInput,
+    MDBAutocomplete,
+    MDBIcon,
+  },
+  setup() {
+    const search7 = ref("");
+
+    const collapse1 = ref(false);
+    const collapse2 = ref(false);
+    const collapse3 = ref(false);
+    return {
+      search7,
+      collapse1,
+      collapse2,
+      collapse3,
+    };
+  },
+  props: {
+    msg: String,
+  },
 };
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<!-- <style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
-</style> -->

@@ -1,11 +1,5 @@
 [
   {
-    "name": "Ledger Nano S Plus",
-    "price": "199.99",
-    "description": "Secure your cryptocurrency with the Ledger Nano S Plus, featuring robust security features, a larger screen for improved usability, and increased storage for a wide range of crypto assets.",
-    "image": "../assets/wallets/Ledger_Nano_S_Plus.png"
-  },
-  {
     "name": "Ballet Real Ethereum",
     "price": "$188.53",
     "description": "Secure and manage your crypto assets with this state-of-the-art hardware wallet that offers top-notch security features, user-friendly interface, and compatibility with multiple cryptocurrencies.",
@@ -34,5 +28,95 @@
     "price": "$151.11",
     "description": "Secure and manage your crypto assets with this state-of-the-art hardware wallet that offers top-notch security features, user-friendly interface, and compatibility with multiple cryptocurrencies.",
     "image": "../assets/wallets/ELLIPAL_Titain_mini-3.png"
+  },
+  {
+    "name": "Keystone 3 Pro",
+    "price": "$299.99",
+    "description": "Secure your cryptocurrency with the Keystone 3 Pro, designed for premium security with air-gapped operations and a large touchscreen for easier management of assets.",
+    "image": "../assets/wallets/Keystone 3 Pro.webp"
+  },
+  {
+    "name": "Ledger Nano S",
+    "price": "$139.99",
+    "description": "Secure your cryptocurrency with the Ledger Nano S, featuring essential security features, a compact design for easy handling, and support for a variety of cryptocurrencies.",
+    "image": "../assets/wallets/Ledger_Nano_S.webp"
+  },
+  {
+    "name": "Ledger Nano S Plus",
+    "price": "199.99",
+    "description": "Secure your cryptocurrency with the Ledger Nano S Plus, featuring robust security features, a larger screen for improved usability, and increased storage for a wide range of crypto assets.",
+    "image": "../assets/wallets/Ledger_Nano_S_Plus.png"
+  },
+  {
+    "name": "Ledger Nano X",
+    "price": "$349.99",
+    "description": "Experience top-tier security with the Ledger Nano X, featuring Bluetooth connectivity, a larger screen, and support for over 1,800 cryptocurrencies.",
+    "image": "../assets/wallets/Ledger_Nano_X.png"
+  },
+  {
+    "name": "Ledger Stax-2",
+    "price": "$379.99",
+    "description": "The Ledger Stax-2 offers advanced protection with a sleek design and cutting-edge technology to keep your crypto safe and easily accessible.",
+    "image": "../assets/wallets/Ledger_Stax-2.webp"
+  },
+  {
+    "name": "Ledger Stax-3",
+    "price": "$389.99",
+    "description": "Upgrade your crypto security with Ledger Stax-3, featuring a robust design and enhanced features for superior asset management.",
+    "image": "../assets/wallets/Ledger_Stax-3.avif"
+  },
+  {
+    "name": "Tangem 2.0",
+    "price": "$179.99",
+    "description": "Tangem 2.0 cards offer a unique and secure way to store and transfer cryptocurrencies via NFC-enabled cards that fit in your wallet.",
+    "image": "../assets/wallets/Tangem_2.0_pack-2.png"
+  },
+  {
+    "name": "Trezor Model One",
+    "price": "$159.99",
+    "description": "Keep your digital currencies secure with Trezor Model One, the pioneering hardware wallet known for its simplicity and robust security features.",
+    "image": "../assets/wallets/Trezor_Model_One.png"
+  },
+  {
+    "name": "Trezor Model T",
+    "price": "$259.99",
+    "description": "The Trezor Model T is a premium hardware wallet offering a touchscreen interface and enhanced security to support a wide range of cryptocurrencies.",
+    "image": "../assets/wallets/Trezor_Model_T.webp"
+  },
+  {
+    "name": "Trezor Safe 3",
+    "price": "$339.99",
+    "description": "Secure, manage, and grow your crypto portfolio with Trezor Safe 3, featuring advanced security protocols and a user-friendly interface for optimal asset protection.",
+    "image": "../assets/wallets/Trezor_Safe_3.png"
+  },
+  {
+    "name": "Keystone 3 Pro",
+    "price": "$299.99",
+    "description": "Secure your cryptocurrency with the Keystone 3 Pro, designed for premium security with air-gapped operations and a large touchscreen for easier management of assets.",
+    "image": "../assets/wallets/Keystone 3 Pro.webp"
+  },
+  {
+    "name": "Tangem 2.0",
+    "price": "$179.99",
+    "description": "Tangem 2.0 cards offer a unique and secure way to store and transfer cryptocurrencies via NFC-enabled cards that fit in your wallet.",
+    "image": "../assets/wallets/Tangem_2.0_pack-2.png"
+  },
+  {
+    "name": "Trezor Model One",
+    "price": "$159.99",
+    "description": "Keep your digital currencies secure with Trezor Model One, the pioneering hardware wallet known for its simplicity and robust security features.",
+    "image": "../assets/wallets/Trezor_Model_One.png"
+  },
+  {
+    "name": "Trezor Model T",
+    "price": "$259.99",
+    "description": "The Trezor Model T is a premium hardware wallet offering a touchscreen interface and enhanced security to support a wide range of cryptocurrencies.",
+    "image": "../assets/wallets/Trezor_Model_T.webp"
+  },
+  {
+    "name": "Trezor Safe 3",
+    "price": "$339.99",
+    "description": "Secure, manage, and grow your crypto portfolio with Trezor Safe 3, featuring advanced security protocols and a user-friendly interface for optimal asset protection.",
+    "image": "../assets/wallets/Trezor_Safe_3.png"
   }
 ]

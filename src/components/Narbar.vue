@@ -7,17 +7,8 @@
     ></MDBNavbarToggler>
     <MDBCollapse v-model="collapse1" id="navbarSupportedContent">
       <MDBNavbarNav class="mb-2 mb-lg-0">
-        <MDBNavbarItem to="#" active>
-          <router-link to="/">Home</router-link>
-        </MDBNavbarItem>
-        <MDBNavbarItem href="#">
-          <router-link to="/products">Products</router-link>
-        </MDBNavbarItem>
-        <MDBNavbarItem href="#">
-          <router-link to="/products"
-            ><router-link to="/about">About</router-link></router-link
-          >
-        </MDBNavbarItem>
+        <MDBNavbarItem to="#" active> Home </MDBNavbarItem>
+        <MDBNavbarItem href="#"> Link </MDBNavbarItem>
         <MDBNavbarItem>
           <!-- Navbar dropdown -->
           <MDBDropdown class="nav-item" v-model="dropdown1">
@@ -48,10 +39,8 @@
       </form>
     </MDBCollapse>
   </MDBNavbar>
-  <!-- Default code -->
-  <router-view />
 </template>
-<!-- Navbar script -->
+
 <script>
 import {
   MDBBtn,
@@ -93,9 +82,3 @@ export default {
   },
 };
 </script>
-
-<style>
-#app {
-  font-family: Roboto, Helvetica, Arial, sans-serif;
-}
-</style>
