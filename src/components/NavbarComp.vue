@@ -1,14 +1,23 @@
 <template>
   <MDBNavbar expand="lg" light bg="light" container>
-    <MDBNavbarBrand href="#">Brand</MDBNavbarBrand>
+    <MDBNavbarBrand href="#" class="fw-bold">VaultPixel</MDBNavbarBrand>
     <MDBNavbarToggler
       @click="collapse1 = !collapse1"
       target="#navbarSupportedContent"
     ></MDBNavbarToggler>
     <MDBCollapse v-model="collapse1" id="navbarSupportedContent">
       <MDBNavbarNav class="mb-2 mb-lg-0">
-        <MDBNavbarItem to="#" active> Home </MDBNavbarItem>
-        <MDBNavbarItem href="#"> Link </MDBNavbarItem>
+        <MDBNavbarItem to="#" active>
+          <router-link to="/">Home</router-link>
+        </MDBNavbarItem>
+        <MDBNavbarItem href="#">
+          <router-link to="/products">Products</router-link>
+        </MDBNavbarItem>
+        <MDBNavbarItem href="#">
+          <router-link to="/products"
+            ><router-link to="/about">About</router-link></router-link
+          >
+        </MDBNavbarItem>
         <MDBNavbarItem>
           <!-- Navbar dropdown -->
           <MDBDropdown class="nav-item" v-model="dropdown1">
@@ -28,7 +37,7 @@
         <MDBNavbarItem to="#" disabled> Disabled </MDBNavbarItem>
       </MDBNavbarNav>
       <!-- Search form -->
-      <form class="d-flex input-group w-auto">
+      <!-- <form class="d-flex input-group w-auto">
         <input
           type="search"
           class="form-control"
@@ -36,11 +45,19 @@
           aria-label="Search"
         />
         <MDBBtn outline="primary"> Search </MDBBtn>
-      </form>
+      </form> -->
+      <MDBBtn color="dark">Sign up</MDBBtn>
+      <MDBBtn outline="dark">Log in</MDBBtn>
+      <MDBBtn color="light"
+        ><router-link to="/about"
+          ><img
+            class="image-icon-cart"
+            src="../assets/icons/cart-item-icon.png" /></router-link
+      ></MDBBtn>
     </MDBCollapse>
   </MDBNavbar>
 </template>
-
+<!-- Navbar script -->
 <script>
 import {
   MDBBtn,
@@ -82,3 +99,9 @@ export default {
   },
 };
 </script>
+
+<style>
+#app {
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+}
+</style>

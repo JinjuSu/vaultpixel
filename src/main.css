@@ -6,7 +6,12 @@
 .image-icon {
   max-width: 20px;
   max-height: 20px;
-  color: rgba(251, 251, 251, 0.15);
+  color: #fbfbfb26;
+}
+
+.image-icon-cart {
+  max-width: 40px;
+  max-height: 40px;
 }
 
 .image-product {
