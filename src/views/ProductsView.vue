@@ -5,107 +5,7 @@
     <div class="row mb-4">
       <div class="col-3">
         <!-- Filter column -->
-        <h3>Find your safest vault</h3>
-        <div>
-          <!-- Filter by Type -->
-          <div class="row my-3">
-            <div class="col-auto me-auto">Type</div>
-            <div class="col-auto">
-              <div type="button">
-                <MDBBtn
-                  color="light"
-                  @click="collapse1 = !collapse1"
-                  aria-controls="fliter-type"
-                  :aria-expanded="collapse1"
-                >
-                  <div v-if="!collapse1">
-                    <img
-                      src="../assets/icons/arrow-icon-up.webp"
-                      alt="arrow-up"
-                      class="image-icon"
-                    />
-                  </div>
-                  <div v-else-if="collapse1">
-                    <img
-                      src="../assets/icons/arrow-icon-right.png"
-                      alt="arrow-up"
-                      class="image-icon"
-                    />
-                  </div>
-                </MDBBtn>
-              </div>
-            </div>
-          </div>
-          <MDBCollapse id="fliter-type" v-model="collapse1">
-            <div class="mt-3">Collapse 1: Price options</div>
-          </MDBCollapse>
-          <hr />
-          <!-- Filter by Brand -->
-          <div class="row my-3">
-            <div class="col-auto me-auto">Brand</div>
-            <div class="col-auto">
-              <div type="button">
-                <MDBBtn
-                  color="light"
-                  @click="collapse2 = !collapse2"
-                  aria-controls="filter-brand"
-                  :aria-expanded="collapse2"
-                >
-                  <div v-if="!collapse2">
-                    <img
-                      src="../assets/icons/arrow-icon-up.webp"
-                      alt="arrow-up"
-                      class="image-icon"
-                    />
-                  </div>
-                  <div v-else-if="collapse2">
-                    <img
-                      src="../assets/icons/arrow-icon-right.png"
-                      alt="arrow-up"
-                      class="image-icon"
-                    />
-                  </div>
-                </MDBBtn>
-              </div>
-            </div>
-          </div>
-          <MDBCollapse id="fliter-brand" v-model="collapse2">
-            <div class="mt-3">Collapse 2: Brand options</div>
-          </MDBCollapse>
-          <hr />
-          <!-- Filter by Price -->
-          <div class="row my-2">
-            <div class="col-auto me-auto">Price</div>
-            <div class="col-auto">
-              <div type="button">
-                <MDBBtn
-                  color="light"
-                  @click="collapse3 = !collapse3"
-                  aria-controls="fliter-price"
-                  :aria-expanded="collapse3"
-                >
-                  <div v-if="!collapse3">
-                    <img
-                      src="../assets/icons/arrow-icon-up.webp"
-                      alt="arrow-up"
-                      class="image-icon"
-                    />
-                  </div>
-                  <div v-if="collapse3">
-                    <img
-                      src="../assets/icons/arrow-icon-right.png"
-                      alt="arrow-up"
-                      class="image-icon"
-                    />
-                  </div>
-                </MDBBtn>
-              </div>
-            </div>
-          </div>
-          <MDBCollapse id="fliter-price" v-model="collapse3">
-            <div class="mt-3">Collapse 3: Price options</div>
-          </MDBCollapse>
-        </div>
+        <FilterComp></FilterComp>
       </div>
       <!-- Product column 3 cards per row -->
       <div class="col">
@@ -156,8 +56,10 @@ import {
 import { ref } from "vue";
 import { products } from "../assets/products.js";
 
+import FilterComp from "../components/FilterComp.vue";
+
 export default {
-  name: "About",
+  name: "Products",
   data() {
     return {
       products,
@@ -173,6 +75,7 @@ export default {
     MDBPagination,
     MDBPageNav,
     MDBPageItem,
+    FilterComp,
   },
   setup() {
     const search7 = ref("");
