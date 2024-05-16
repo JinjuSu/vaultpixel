@@ -75,7 +75,7 @@ import {
 import { ref } from "vue";
 
 export default {
-  name: "Navbar",
+  name: "NavbarComp",
   components: {
     MDBBtn,
     MDBNavbar,
