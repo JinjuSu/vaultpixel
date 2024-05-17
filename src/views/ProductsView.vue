@@ -1,8 +1,7 @@
 <template>
   <div class="container my-5">
     <!-- Search bar -->
-    <p>{{ test }}</p>
-    <p>{{ products }}</p>
+
     <MDBInput class="mb-4" v-model="searchProduct" placeholder="Search" />
     <div class="row mb-4">
       <div class="col-3">
@@ -75,6 +74,8 @@ export default {
         id: "",
         name: "",
         price: "",
+        description: "",
+        img: "",
       },
       products,
       test: "test printing",
@@ -106,7 +107,7 @@ export default {
   computed: {
     filterProducts: function () {
       return this.products.filter((product) => {
-        return product.name // products please return item names that matche the searchProduct.name
+        return product.name // products please find an item whose name matches the searchProduct.name
           .toLowerCase()
           .includes(this.searchProduct.toLowerCase());
       });
