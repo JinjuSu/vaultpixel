@@ -19,6 +19,11 @@
   max-height: 150px;
 }
 
+.image-product-details {
+  max-width: 300px;
+  max-height: 300px;
+}
+
 .button-shop {
   margin: 0;
   width: 100%;

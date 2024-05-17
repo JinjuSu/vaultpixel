@@ -1,8 +1,36 @@
 <template>
-  <h1>This is Product Details page</h1>
-  <p>This the product: {{ product }}</p>
-  <h1>{{ product.id }}</h1>
-  <h1>{{ product.name }}</h1>
+  <div class="container my-5">
+    <div class="row justify-content-center text-center gx-5">
+      <div class="col-8 col-md-6">
+        <img
+          class="img-fluid rounded-start"
+          :src="product.image"
+          alt="first-card"
+        />
+      </div>
+
+      <div class="col-8 col-md-6">
+        <!-- Details go here -->
+        <div class="text-start">
+          <h1>{{ product.name }}</h1>
+          <p>{{ product.description }}</p>
+          <p>{{ product.price }}</p>
+          <p>rating: {{ product.rating }}/5</p>
+        </div>
+        <div>
+          <router-link :to="'/product/' + product.id">
+            <a
+              href="#!"
+              class="btn btn-sm btn-dark button-shop"
+              data-mdb-ripple-init
+            >
+              Shop now
+            </a></router-link
+          >
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 <script>
 import { products } from "../assets/product-details/products.js";
@@ -13,7 +41,14 @@ export default {
     return {
       // Use a few extra object to loop the product id
       products,
-      product: {},
+      product: {
+        id: "",
+        name: "",
+        price: "",
+        description: "",
+        rating: "",
+        image: "",
+      },
       //   product: products.find( // this method returns null making product undefined
       //     (product) => product.id === this.$route.params.productId
       //   ),
