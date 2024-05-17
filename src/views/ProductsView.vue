@@ -58,7 +58,7 @@ import {
   MDBPageItem,
 } from "mdb-vue-ui-kit";
 import { ref } from "vue";
-import { products } from "../assets/products.js";
+import { products } from "../assets/product-details/products.js";
 
 import FilterComp from "../components/FilterComp.vue";
 
@@ -72,8 +72,6 @@ export default {
         price: "",
       },
       products,
-      product: "",
-      test: "test",
     };
   },
   components: {

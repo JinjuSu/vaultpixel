@@ -1,18 +1,18 @@
-import BalletRealEthereum from "../assets/wallets/Ballet_Real_Ethereum.png";
-import DCent from "../assets/wallets/D'Cent_.webp";
-import ELLIPALTitainMini1 from "../assets/wallets/ELLIPAL_Titain_mini-1.webp";
-import ELLIPALTitainMini2 from "../assets/wallets/ELLIPAL_Titain_mini-2.png";
-import ELLIPALTitainMini3 from "../assets/wallets/ELLIPAL_Titain_mini-3.png";
-import Keystone3Pro from "../assets/wallets/Keystone 3 Pro.webp";
-import LedgerNanoS from "../assets/wallets/Ledger_Nano_S.webp";
-import LedgerNanoSPlus from "../assets/wallets/Ledger_Nano_S_Plus.png";
-import LedgerNanoX from "../assets/wallets/Ledger_Nano_X.png";
-import LedgerStax2 from "../assets/wallets/Ledger_Stax-2.webp";
-import LedgerStax3 from "../assets/wallets/Ledger_Stax-3.avif";
-import Tangem20 from "../assets/wallets/Tangem_2.0_pack-2.png";
-import TrezorModelOne from "../assets/wallets/Trezor_Model_One.png";
-import TrezorModelT from "../assets/wallets/Trezor_Model_T.webp";
-import TrezorSafe3 from "../assets/wallets/Trezor_Safe_3.png";
+import BalletRealEthereum from "../wallets/Ballet_Real_Ethereum.png";
+import DCent from "../wallets/D'Cent_.webp";
+import ELLIPALTitainMini1 from "../wallets/ELLIPAL_Titain_mini-1.webp";
+import ELLIPALTitainMini2 from "../wallets/ELLIPAL_Titain_mini-2.png";
+import ELLIPALTitainMini3 from "../wallets/ELLIPAL_Titain_mini-3.png";
+import Keystone3Pro from "../wallets/Keystone 3 Pro.webp";
+import LedgerNanoS from "../wallets/Ledger_Nano_S.webp";
+import LedgerNanoSPlus from "../wallets/Ledger_Nano_S_Plus.png";
+import LedgerNanoX from "../wallets/Ledger_Nano_X.png";
+import LedgerStax2 from "../wallets/Ledger_Stax-2.webp";
+import LedgerStax3 from "../wallets/Ledger_Stax-3.avif";
+import Tangem20 from "../wallets/Tangem_2.0_pack-2.png";
+import TrezorModelOne from "../wallets/Trezor_Model_One.png";
+import TrezorModelT from "../wallets/Trezor_Model_T.webp";
+import TrezorSafe3 from "../wallets/Trezor_Safe_3.png";
 
 export const products = [
   {
