@@ -1,55 +1,40 @@
 <template>
-  <h1>Product Details Page</h1>
-  <div class="row">
-    <div class="col-4" v-for="product in filterProducts" :key="product.id">
-      <div class="card grid-wrap">
-        <div class="card-header text-center">
-          <img class="image-product" :src="product.image" />
-        </div>
-        <div class="card-body">
-          <h5 class="card-title">{{ product.name }}</h5>
-          <p class="card-text">{{ product.price }}</p>
-          <a
-            href="#!"
-            class="btn btn-sm btn-dark button-shop"
-            data-mdb-ripple-init
-            >Shop now</a
-          >
-        </div>
-      </div>
-    </div>
-  </div>
+  <h1>This is Product Details page</h1>
+  <p>This the product: {{ product }}</p>
+  <h1>{{ product.id }}</h1>
+  <h1>{{ product.name }}</h1>
 </template>
 <script>
-import {
-  MDBContainer,
-  MDBCollapse,
-  MDBBtn,
-  MDBInput,
-  MDBIcon,
-  MDBPagination,
-  MDBPageNav,
-  MDBPageItem,
-} from "mdb-vue-ui-kit";
-import { ref } from "vue";
 import { products } from "../assets/product-details/products.js";
 
 export default {
   name: "ProductDetailsView",
   data() {
     return {
-      searchProduct: {
-        id: "",
-        name: "",
-        price: "",
-      },
+      // Use a few extra object to loop the product id
       products,
+      product: {},
+      //   product: products.find( // this method returns null making product undefined
+      //     (product) => product.id === this.$route.params.productId
+      //   ),
     };
   },
   computed: {
     filterProducts: function () {
-      return this.products.filter((product) => {});
+      return this.products.filter((product) => {
+        return product.name // products please return item names that matche the searchProduct.name
+          .toLowerCase()
+          .includes(this.product);
+      });
     },
+  },
+  mounted() {
+    const productId = this.$route.params.id;
+    this.product = products.find(
+      (product) => product.id.toString() === productId
+    );
+    console.log("Product ID:", productId);
+    console.log("Product Details:", this.product);
   },
 };
 </script>

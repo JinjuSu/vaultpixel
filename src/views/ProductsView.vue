@@ -1,7 +1,9 @@
 <template>
   <div class="container my-5">
     <!-- Search bar -->
-    <MDBInput class="mb-4" v-model="searchProduct" placeholder="search" />
+    <p>{{ test }}</p>
+    <p>{{ products }}</p>
+    <MDBInput class="mb-4" v-model="searchProduct" placeholder="Search" />
     <div class="row mb-4">
       <div class="col-3">
         <!-- Filter column -->
@@ -22,11 +24,14 @@
               <div class="card-body">
                 <h5 class="card-title">{{ product.name }}</h5>
                 <p class="card-text">{{ product.price }}</p>
-                <a
-                  href="#!"
-                  class="btn btn-sm btn-dark button-shop"
-                  data-mdb-ripple-init
-                  >Shop now</a
+                <router-link :to="'/product/' + product.id">
+                  <a
+                    href="#!"
+                    class="btn btn-sm btn-dark button-shop"
+                    data-mdb-ripple-init
+                  >
+                    Shop now
+                  </a></router-link
                 >
               </div>
             </div>
@@ -72,6 +77,7 @@ export default {
         price: "",
       },
       products,
+      test: "test printing",
     };
   },
   components: {
@@ -97,13 +103,10 @@ export default {
       collapse3,
     };
   },
-  props: {
-    msg: String,
-  },
   computed: {
     filterProducts: function () {
       return this.products.filter((product) => {
-        return product.name
+        return product.name // products please return item names that matche the searchProduct.name
           .toLowerCase()
           .includes(this.searchProduct.toLowerCase());
       });
