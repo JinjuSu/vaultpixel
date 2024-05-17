@@ -14,6 +14,36 @@ import TrezorModelOne from "../wallets/Trezor_Model_One.png";
 import TrezorModelT from "../wallets/Trezor_Model_T.webp";
 import TrezorSafe3 from "../wallets/Trezor_Safe_3.png";
 
+export const cartItems = [
+  {
+    id: 16,
+    name: "Trezor Model One",
+    price: "$289.99",
+    description:
+      "Keep your digital currencies secure with Trezor Model One, the pioneering hardware wallet known for its simplicity and robust security features.",
+    image: TrezorModelOne,
+    rating: 4.0,
+  },
+  {
+    id: 11,
+    name: "Ledger Stax-2",
+    price: "$999.49",
+    description:
+      "The Ledger Stax-2 offers advanced protection with a sleek design and cutting-edge technology to keep your crypto safe and easily accessible.",
+    image: LedgerStax2,
+    rating: 4.5,
+  },
+  {
+    id: 9,
+    name: "Ledger Nano S Plus",
+    price: "$259.99",
+    description:
+      "Secure your cryptocurrency with the Ledger Nano S Plus, featuring robust security features, a larger screen for improved usability, and increased storage for a wide range of crypto assets.",
+    image: LedgerNanoSPlus,
+    rating: 5.0,
+  },
+];
+
 export const products = [
   {
     id: 1,

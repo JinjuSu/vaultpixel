@@ -47,3 +47,8 @@
   font-weight: semi-bold;
   text-decoration-line: none;
 }
+
+.footcomp {
+  background-color: black;
+  height: 100px;
+}

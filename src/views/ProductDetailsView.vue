@@ -24,7 +24,7 @@
               class="btn btn-sm btn-dark button-shop"
               data-mdb-ripple-init
             >
-              Shop now
+              Add to cart
             </a></router-link
           >
         </div>
