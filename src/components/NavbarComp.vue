@@ -46,11 +46,20 @@
       </form> -->
       <MDBBtn color="dark">Sign up</MDBBtn>
       <MDBBtn outline="dark">Log in</MDBBtn>
-      <MDBBtn color="light"
+      <!-- Cart icon logic -->
+
+      <MDBBtn v-if="cartItems.length > 0" color="light"
         ><router-link to="/cart"
           ><img
             class="image-icon-cart"
             src="../assets/icons/cart-item-icon.png" /></router-link
+      ></MDBBtn>
+
+      <MDBBtn v-else-if="cartItems.length === 0" color="light"
+        ><router-link to="/cart"
+          ><img
+            class="image-icon-cart"
+            src="../assets/icons/cart-icon.png" /></router-link
       ></MDBBtn>
     </MDBCollapse>
   </MDBNavbar>
@@ -72,8 +81,15 @@ import {
 } from "mdb-vue-ui-kit";
 import { ref } from "vue";
 
+import { cartItems } from "@/assets/product-details/products";
+
 export default {
   name: "NavbarComp",
+  data() {
+    return {
+      cartItems,
+    };
+  },
   components: {
     MDBBtn,
     MDBNavbar,

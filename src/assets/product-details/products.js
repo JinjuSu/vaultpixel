@@ -23,6 +23,7 @@ export const cartItems = [
       "Keep your digital currencies secure with Trezor Model One, the pioneering hardware wallet known for its simplicity and robust security features.",
     image: TrezorModelOne,
     rating: 4.0,
+    qty: 1,
   },
   {
     id: 11,
@@ -32,6 +33,7 @@ export const cartItems = [
       "The Ledger Stax-2 offers advanced protection with a sleek design and cutting-edge technology to keep your crypto safe and easily accessible.",
     image: LedgerStax2,
     rating: 4.5,
+    qty: 1,
   },
   {
     id: 9,
@@ -41,6 +43,7 @@ export const cartItems = [
       "Secure your cryptocurrency with the Ledger Nano S Plus, featuring robust security features, a larger screen for improved usability, and increased storage for a wide range of crypto assets.",
     image: LedgerNanoSPlus,
     rating: 5.0,
+    qty: 1,
   },
 ];
 
@@ -53,6 +56,7 @@ export const products = [
       "Secure and manage your crypto assets with this state-of-the-art hardware wallet that offers top-notch security features, user-friendly interface, and compatibility with multiple cryptocurrencies.",
     image: BalletRealEthereum,
     rating: 4.5,
+    qty: 1,
   },
   {
     id: 2,
@@ -62,6 +66,7 @@ export const products = [
       "Secure and manage your crypto assets with this state-of-the-art hardware wallet that offers top-notch security features, user-friendly interface, and compatibility with multiple cryptocurrencies.",
     image: DCent,
     rating: 4.0,
+    qty: 1,
   },
   {
     id: 3,
@@ -71,6 +76,7 @@ export const products = [
       "Secure and manage your crypto assets with this state-of-the-art hardware wallet that offers top-notch security features, user-friendly interface, and compatibility with multiple cryptocurrencies.",
     image: ELLIPALTitainMini1,
     rating: 4.5,
+    qty: 1,
   },
   {
     id: 4,
@@ -80,6 +86,7 @@ export const products = [
       "Secure and manage your crypto assets with this state-of-the-art hardware wallet that offers top-notch security features, user-friendly interface, and compatibility with multiple cryptocurrencies.",
     image: ELLIPALTitainMini2,
     rating: 3.0,
+    qty: 1,
   },
   {
     id: 5,
@@ -89,6 +96,7 @@ export const products = [
       "Secure and manage your crypto assets with this state-of-the-art hardware wallet that offers top-notch security features, user-friendly interface, and compatibility with multiple cryptocurrencies.",
     image: ELLIPALTitainMini3,
     rating: 3.5,
+    qty: 1,
   },
   {
     id: 6,
@@ -98,6 +106,7 @@ export const products = [
       "Secure your cryptocurrency with the Keystone 3 Pro, designed for premium security with air-gapped operations and a large touchscreen for easier management of assets.",
     image: Keystone3Pro,
     rating: 4.5,
+    qty: 1,
   },
   {
     id: 7,
@@ -107,6 +116,7 @@ export const products = [
       "Secure your cryptocurrency with the Keystone 3 Pro, designed for premium security with air-gapped operations and a large touchscreen for easier management of assets.",
     image: Keystone3Pro,
     rating: 4.5,
+    qty: 1,
   },
   {
     id: 8,
@@ -116,6 +126,7 @@ export const products = [
       "Secure your cryptocurrency with the Ledger Nano S, featuring essential security features, a compact design for easy handling, and support for a variety of cryptocurrencies.",
     image: LedgerNanoS,
     rating: 4.0,
+    qty: 1,
   },
   {
     id: 9,
@@ -125,6 +136,7 @@ export const products = [
       "Secure your cryptocurrency with the Ledger Nano S Plus, featuring robust security features, a larger screen for improved usability, and increased storage for a wide range of crypto assets.",
     image: LedgerNanoSPlus,
     rating: 5.0,
+    qty: 1,
   },
   {
     id: 10,
@@ -134,6 +146,7 @@ export const products = [
       "Experience top-tier security with the Ledger Nano X, featuring Bluetooth connectivity, a larger screen, and support for over 1,800 cryptocurrencies.",
     image: LedgerNanoX,
     rating: 5.0,
+    qty: 1,
   },
   {
     id: 11,
@@ -143,6 +156,7 @@ export const products = [
       "The Ledger Stax-2 offers advanced protection with a sleek design and cutting-edge technology to keep your crypto safe and easily accessible.",
     image: LedgerStax2,
     rating: 4.5,
+    qty: 1,
   },
   {
     id: 12,
@@ -152,6 +166,7 @@ export const products = [
       "Upgrade your crypto security with Ledger Stax-3, featuring a robust design and enhanced features for superior asset management.",
     image: LedgerStax3,
     rating: 5.0,
+    qty: 1,
   },
   {
     id: 13,
@@ -161,6 +176,7 @@ export const products = [
       "Tangem 2.0 cards offer a unique and secure way to store and transfer cryptocurrencies via NFC-enabled cards that fit in your wallet.",
     image: Tangem20,
     rating: 3.5,
+    qty: 1,
   },
   {
     id: 14,
@@ -170,6 +186,7 @@ export const products = [
       "Tangem 2.0 cards offer a unique and secure way to store and transfer cryptocurrencies via NFC-enabled cards that fit in your wallet.",
     image: Tangem20,
     rating: 3.5,
+    qty: 1,
   },
   {
     id: 15,
@@ -179,6 +196,7 @@ export const products = [
       "Keep your digital currencies secure with Trezor Model One, the pioneering hardware wallet known for its simplicity and robust security features.",
     image: TrezorModelOne,
     rating: 4.0,
+    qty: 1,
   },
   {
     id: 16,
@@ -188,6 +206,7 @@ export const products = [
       "Keep your digital currencies secure with Trezor Model One, the pioneering hardware wallet known for its simplicity and robust security features.",
     image: TrezorModelOne,
     rating: 4.0,
+    qty: 1,
   },
   {
     id: 17,
@@ -197,6 +216,7 @@ export const products = [
       "The Trezor Model T is a premium hardware wallet offering a touchscreen interface and enhanced security to support a wide range of cryptocurrencies.",
     image: TrezorModelT,
     rating: 4.5,
+    qty: 1,
   },
   {
     id: 18,
@@ -206,6 +226,7 @@ export const products = [
       "The Trezor Model T is a premium hardware wallet offering a touchscreen interface and enhanced security to support a wide range of cryptocurrencies.",
     image: TrezorModelT,
     rating: 4.5,
+    qty: 1,
   },
   {
     id: 19,
@@ -215,6 +236,7 @@ export const products = [
       "Secure, manage, and grow your crypto portfolio with Trezor Safe 3, featuring advanced security protocols and a user-friendly interface for optimal asset protection.",
     image: TrezorSafe3,
     rating: 4.5,
+    qty: 1,
   },
   {
     id: 20,
@@ -224,5 +246,6 @@ export const products = [
       "Secure, manage, and grow your crypto portfolio with Trezor Safe 3, featuring advanced security protocols and a user-friendly interface for optimal asset protection.",
     image: TrezorSafe3,
     rating: 4.5,
+    qty: 1,
   },
 ];
