@@ -1,6 +1,6 @@
 <!-- Not working -->
 <template>
-  <div v-for="product in products" :key="product.id">
+  <div v-for="product in cartItems" :key="product.id">
     <div class="row justify-content-center text-center">
       <div class="col-8 col-md-3">
         <!-- Image goes here -->
@@ -73,8 +73,41 @@
 </template>
 
 <script>
+import {
+  MDBContainer,
+  MDBCol,
+  MDBRow,
+  MDBIcon,
+  MDBBtn,
+  mdbRipple,
+} from "mdb-vue-ui-kit";
 export default {
   name: "CartComp",
-  props: ["products"],
+  props: {
+    msg: String,
+    cartItems: {},
+    product: {
+      id: "",
+      name: "",
+      price: "",
+      description: "",
+      rating: "",
+      image: "",
+      qty: "",
+    },
+  },
+  components: {
+    MDBContainer,
+    MDBCol,
+    MDBRow,
+    MDBIcon,
+    MDBBtn,
+  },
+  directives: {
+    mdbRipple,
+  },
+  mounted() {
+    console.log("cartItems in Cart Component: ", this.cartItems);
+  },
 };
 </script>
