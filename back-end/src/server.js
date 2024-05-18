@@ -49,7 +49,7 @@ app.post("/cart", (req, res) => {
 
 // Remove item from cart w/ DELETE callback function
 app.delete("/cart/:productId", (req, res) => {
-  // need product ID in request body
+  // need product ID in request params
   const productId = req.params.productId;
   cartItems = cartItems.filter((product) => product.id !== productId);
   res.json(cartItems);
