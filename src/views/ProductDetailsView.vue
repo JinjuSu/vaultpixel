@@ -2,11 +2,13 @@
   <div class="container my-5">
     <div class="row justify-content-center text-center gx-5">
       <div class="col-8 col-md-6">
-        <img
-          class="img-fluid rounded-start"
-          :src="product.image"
-          alt="first-card"
-        />
+        <div class="image-product-details">
+          <img
+            class="img-fluid rounded-start"
+            :src="product.image"
+            alt="first-card"
+          />
+        </div>
       </div>
 
       <div class="col-8 col-md-6">
@@ -17,8 +19,8 @@
           <p>{{ product.price }}</p>
           <p>rating: {{ product.rating }}/5</p>
         </div>
-        <div>
-          <router-link :to="'/product/' + product.id">
+        <div class="">
+          <router-link :to="'/cart/' + product.id">
             <a
               href="#!"
               class="btn btn-sm btn-dark button-shop"
@@ -39,7 +41,6 @@ export default {
   name: "ProductDetailsView",
   data() {
     return {
-      // Use a few extra object to loop the product id
       products,
       product: {
         id: "",
@@ -48,18 +49,14 @@ export default {
         description: "",
         rating: "",
         image: "",
+        qty: "",
       },
-      //   product: products.find( // this method returns null making product undefined
-      //     (product) => product.id === this.$route.params.productId
-      //   ),
     };
   },
   computed: {
     filterProducts: function () {
       return this.products.filter((product) => {
-        return product.name // products please return item names that matche the searchProduct.name
-          .toLowerCase()
-          .includes(this.product);
+        return product.name.toLowerCase().includes(this.product);
       });
     },
   },

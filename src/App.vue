@@ -3,7 +3,8 @@
 
   <!-- Default code -->
   <router-view />
-  <Footer></Footer>
+
+  <div class="sitcky-bottom"><Footer></Footer></div>
 </template>
 <!-- Navbar script -->
 <script>

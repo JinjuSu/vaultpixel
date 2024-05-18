@@ -14,6 +14,18 @@
   max-height: 40px;
 }
 
+.image-icon-qty {
+  font-size: 20px;
+  margin: 2px;
+  color: #2c2c2c;
+}
+
+.image-icon-trash {
+  font-size: 20px;
+  margin: 2px;
+  color: #ec3c3c;
+}
+
 .image-product {
   max-width: 150px;
   max-height: 150px;
@@ -22,6 +34,13 @@
 .image-product-details {
   max-width: 300px;
   max-height: 300px;
+  margin-bottom: 100px;
+}
+
+.image-empty-cart {
+  max-width: 300px;
+  max-height: 300px;
+  margin-bottom: 50px;
 }
 
 .button-shop {
