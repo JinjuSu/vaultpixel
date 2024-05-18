@@ -9,7 +9,11 @@ let products = productsRaw;
 
 const app = express();
 
-// need this to use .body (for POST, DELETE functions)
+function populatedCartIds(ids) {
+  return ids.map((id) => products.find((product) => product.id === id));
+}
+
+// need this to use .body (for POST request)
 app.use(express.json());
 
 app.get("/hello", (req, res) => {
@@ -21,7 +25,8 @@ app.get("/products", (req, res) => {
 });
 
 app.get("/cart", (req, res) => {
-  res.json(cartItems);
+  const populatedCart = populatedCartIds(cartItems); // passing cartItems as ids argument
+  res.json(populatedCart);
 });
 
 app.get("/product/:productId", (req, res) => {
@@ -29,30 +34,27 @@ app.get("/product/:productId", (req, res) => {
   const product = products.find(
     (product) => product.id.toString() === productId
   );
-  // console.log("Product ID:", productId);
-  // console.log("Found product:", product);
-
   res.json(product);
 });
 
 // Add item to cart w/ POST callback function
 app.post("/cart", (req, res) => {
-  // need product ID in request body
   const productId = req.body.id;
-  const product = products.find(
-    (product) => product.id.toString() === productId
-  );
-  // push the item into cart
-  cartItems.push(product);
-  res.json(cartItems);
+  // push the item into cart directly using productId
+  cartItems.push(productId);
+  const populatedCart = populatedCartIds(cartItems);
+  res.json(populatedCart);
 });
 
 // Remove item from cart w/ DELETE callback function
 app.delete("/cart/:productId", (req, res) => {
   // need product ID in request params
   const productId = req.params.productId;
-  cartItems = cartItems.filter((product) => product.id !== productId);
-  res.json(cartItems);
+  console.log(productId);
+  cartItems = cartItems.filter((id) => id !== productId);
+  const populatedCart = populatedCartIds(cartItems);
+
+  res.json(populatedCart);
 });
 
 app.listen(8000, () => {
