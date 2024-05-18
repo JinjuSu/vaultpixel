@@ -14,7 +14,7 @@
         <div class="row">
           <div
             class="col-4"
-            v-for="product in filterProducts"
+            v-for="product in paginatedProducts"
             :key="product.id"
           >
             <div class="card grid-wrap">
@@ -39,13 +39,29 @@
         </div>
       </div>
     </div>
-    <nav aria-label="Page navigation example" back>
+  </div>
+  <div class="container">
+    <nav aria-label="Page navigation example">
       <MDBPagination>
-        <MDBPageNav prev disabled></MDBPageNav>
-        <MDBPageItem href="#">1</MDBPageItem>
-        <MDBPageItem icon active href="#">2</MDBPageItem>
-        <MDBPageItem href="#">3</MDBPageItem>
-        <MDBPageNav next icon></MDBPageNav>
+        <MDBPageNav
+          prev
+          :disabled="currentPage === 1"
+          @click="changePage(currentPage - 1)"
+        ></MDBPageNav>
+        <MDBPageItem
+          v-for="n in totalPages"
+          :key="n"
+          :class="{ active: n === currentPage }"
+        >
+          <a class="page-link" href="#" @click.prevent="changePage(n)">{{
+            n
+          }}</a>
+        </MDBPageItem>
+        <MDBPageNav
+          next
+          :disabled="currentPage === totalPages"
+          @click="changePage(currentPage + 1)"
+        ></MDBPageNav>
       </MDBPagination>
     </nav>
   </div>
@@ -62,7 +78,7 @@ import {
   MDBPageNav,
   MDBPageItem,
 } from "mdb-vue-ui-kit";
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import { products } from "../assets/product-details/products.js";
 
 import FilterComp from "../components/FilterComp.vue";
@@ -95,14 +111,36 @@ export default {
   },
   setup() {
     const searchProduct = ref("");
-    const collapse1 = ref(false);
-    const collapse2 = ref(false);
-    const collapse3 = ref(false);
+    const currentPage = ref(1);
+    const itemsPerPage = ref(6);
+
+    const filteredProducts = computed(() => {
+      return products.filter((product) =>
+        product.name.toLowerCase().includes(searchProduct.value.toLowerCase())
+      );
+    });
+
+    const paginatedProducts = computed(() => {
+      const start = (currentPage.value - 1) * itemsPerPage.value;
+      const end = start + itemsPerPage.value;
+      return filteredProducts.value.slice(start, end);
+    });
+
+    const totalPages = computed(() => {
+      return Math.ceil(filteredProducts.value.length / itemsPerPage.value);
+    });
+
+    function changePage(page) {
+      currentPage.value = page;
+    }
+
     return {
       searchProduct,
-      collapse1,
-      collapse2,
-      collapse3,
+      filteredProducts,
+      paginatedProducts,
+      currentPage,
+      totalPages,
+      changePage,
     };
   },
   computed: {
