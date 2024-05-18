@@ -51,7 +51,7 @@ app.delete("/cart/:productId", (req, res) => {
   // need product ID in request params
   const productId = req.params.productId;
   console.log(productId);
-  cartItems = cartItems.filter((id) => id !== productId);
+  cartItems = cartItems.filter((id) => id.toString() !== productId);
   const populatedCart = populatedCartIds(cartItems);
 
   res.json(populatedCart);
