@@ -71,7 +71,7 @@
         </div>
         <hr />
       </div>
-
+      <!-- Proceed button (outside the loop) -->
       <div class="my-5">
         <a
           href="#!"
