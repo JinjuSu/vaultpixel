@@ -8,6 +8,7 @@
         <!-- Filter column -->
         <FilterComp></FilterComp>
       </div>
+
       <!-- Product column 3 cards per row -->
       <div class="col">
         <div class="row">
