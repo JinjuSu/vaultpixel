@@ -1,7 +1,7 @@
 <template>
-  <MDBContainer light bg="light">
-    <div v-if="cartItems.length > 0">
-      <div class="" v-for="product in cartItems" :key="product.id">
+  <MDBContainer light bg="light ">
+    <div class="container py-5" v-if="cartItems.length > 0">
+      <div v-for="product in cartItems" :key="product.id">
         <div class="row justify-content-center text-center">
           <div class="col-8 col-md-3">
             <!-- Image goes here -->
@@ -69,6 +69,7 @@
             </div>
           </div>
         </div>
+        <hr />
       </div>
 
       <div class="my-5">
