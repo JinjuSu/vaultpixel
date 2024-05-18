@@ -21,11 +21,13 @@ app.get("/product/:productId", (req, res) => {
     (product) => product.id.toString() === productId
   );
 
-  console.log("Product ID:", productId);
-  console.log("Found product:", product);
+  // console.log("Product ID:", productId);
+  // console.log("Found product:", product);
 
   res.json(product);
 });
+
+app.post("/cart", (req, res) => {});
 
 app.listen(8000, () => {
   console.log("Server is listening on port 8000");
