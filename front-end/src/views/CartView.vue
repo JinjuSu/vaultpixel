@@ -57,12 +57,12 @@ export default {
       cartItems,
       product: {
         id: "",
-        name: "",
-        price: "",
-        description: "",
-        rating: "",
-        image: "",
-        qty: "",
+        name: null,
+        price: null,
+        description: null,
+        rating: null,
+        image: null,
+        qty: null,
       },
     };
   },
