@@ -18,7 +18,7 @@ import TrezorSafe3 from "../wallets/Trezor_Safe_3.png";
 
 export const cartItems = [
   {
-    id: 3,
+    id: "3",
     name: "ELLIPAL Titain mini-2",
     price: 499.99,
     description:
@@ -28,7 +28,7 @@ export const cartItems = [
     qty: 1,
   },
   {
-    id: 12,
+    id: "12",
     name: "Ledger Stax-3",
     price: 1099.99,
     description:
@@ -38,7 +38,7 @@ export const cartItems = [
     qty: 1,
   },
   {
-    id: 5,
+    id: "5",
     name: "Keystone 3 Pro",
     price: 599.99,
     description:
@@ -51,7 +51,7 @@ export const cartItems = [
 
 export const products = [
   {
-    id: 1,
+    id: "1",
     name: "DCent",
     price: 289.49,
     description:
@@ -61,7 +61,7 @@ export const products = [
     qty: 1,
   },
   {
-    id: 2,
+    id: "2",
     name: "ELLIPAL Titain mini-1",
     price: 439.49,
     description:
@@ -71,7 +71,7 @@ export const products = [
     qty: 1,
   },
   {
-    id: 3,
+    id: "3",
     name: "ELLIPAL Titain mini-2",
     price: 499.99,
     description:
@@ -81,7 +81,7 @@ export const products = [
     qty: 1,
   },
   {
-    id: 4,
+    id: "4",
     name: "ELLIPAL Titain mini-3",
     price: 549.49,
     description:
@@ -91,7 +91,7 @@ export const products = [
     qty: 1,
   },
   {
-    id: 5,
+    id: "5",
     name: "Keystone 3 Pro",
     price: 599.99,
     description:
@@ -101,7 +101,7 @@ export const products = [
     qty: 1,
   },
   {
-    id: 6,
+    id: "6",
     name: "Ledger Nano S",
     price: 139.49,
     description:
@@ -111,7 +111,7 @@ export const products = [
     qty: 1,
   },
   {
-    id: 7,
+    id: "7",
     name: "Ledger Nano S Plus",
     price: 259.99,
     description:
@@ -121,7 +121,7 @@ export const products = [
     qty: 1,
   },
   {
-    id: 8,
+    id: "8",
     name: "Ledger Nano X",
     price: 899.49,
     description:
@@ -131,17 +131,7 @@ export const products = [
     qty: 1,
   },
   {
-    id: 9,
-    name: "Ledger Nano X Clay",
-    price: 929.49,
-    description:
-      "Introducing the Ledger Nano X Clay, designed for the discerning user with a focus on extended battery life, rugged durability, and support for multiple cryptocurrencies, ensuring top-level security on the go.",
-    image: LedgerNanoXClay,
-    rating: 4.5,
-    qty: 1,
-  },
-  {
-    id: 10,
+    id: "9",
     name: "Ledger Nano X WVRPS",
     price: 909.49,
     description:
@@ -151,7 +141,17 @@ export const products = [
     qty: 1,
   },
   {
-    id: 11,
+    id: "10",
+    name: "Ledger Nano X Clay",
+    price: 929.49,
+    description:
+      "Introducing the Ledger Nano X Clay, designed for the discerning user with a focus on extended battery life, rugged durability, and support for multiple cryptocurrencies, ensuring top-level security on the go.",
+    image: LedgerNanoXClay,
+    rating: 4.5,
+    qty: 1,
+  },
+  {
+    id: "11",
     name: "Ledger Stax-2",
     price: 999.49,
     description:
@@ -161,7 +161,7 @@ export const products = [
     qty: 1,
   },
   {
-    id: 12,
+    id: "12",
     name: "Ledger Stax-3",
     price: 1099.99,
     description:
@@ -171,7 +171,7 @@ export const products = [
     qty: 1,
   },
   {
-    id: 13,
+    id: "13",
     name: "Tangem 2.0 pack 2",
     price: 239.49,
     description:
@@ -181,7 +181,7 @@ export const products = [
     qty: 1,
   },
   {
-    id: 14,
+    id: "14",
     name: "Tangem 2.0 pack 3",
     price: 389.99,
     description:
@@ -191,7 +191,7 @@ export const products = [
     qty: 1,
   },
   {
-    id: 15,
+    id: "15",
     name: "Trezor Model One",
     price: 239.49,
     description:
@@ -201,7 +201,7 @@ export const products = [
     qty: 1,
   },
   {
-    id: 16,
+    id: "16",
     name: "Trezor Model T",
     price: 679.49,
     description:
@@ -211,7 +211,7 @@ export const products = [
     qty: 1,
   },
   {
-    id: 17,
+    id: "17",
     name: "Trezor Safe 3",
     price: 879.49,
     description:
