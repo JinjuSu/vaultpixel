@@ -12,7 +12,6 @@ import LedgerStax2 from "../wallets/Ledger_Stax-2.png";
 import LedgerStax3 from "../wallets/Ledger_Stax-3.png";
 import Tangem20pack2 from "../wallets/Tangem_2.0_pack-2.png";
 import Tangem20pack3 from "../wallets/Tangem_2.0_pack-3.png";
-
 import TrezorModelOne from "../wallets/Trezor_Model_One.png";
 import TrezorModelT from "../wallets/Trezor_Model_T.png";
 import TrezorSafe3 from "../wallets/Trezor_Safe_3.png";

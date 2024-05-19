@@ -1,7 +1,7 @@
 // import DCent from "../wallets/D'Cent.png";
 // import ELLIPALTitainMini1 from "../wallets/ELLIPAL_Titain_mini-1.png";
 // import ELLIPALTitainMini2 from "../wallets/ELLIPAL_Titain_mini-2.png";
-// import ELLIPALTitainMini3 from "../wallets/ELLIPAL_Titain_mini-3.png";
+// import ELLIPALTitainMini3 from "../wallets/ELLIPAL_Titan_2.0-3.png";
 // import Keystone3Pro from "../wallets/Keystone 3 Pro.png";
 // import LedgerNanoS from "../wallets/Ledger_Nano_S.png";
 // import LedgerNanoSPlus from "../wallets/Ledger_Nano_S_Plus.png";
@@ -52,7 +52,7 @@ export const products = [
     price: "$549.49",
     description:
       "Secure and manage your crypto assets with this state-of-the-art hardware wallet that offers top-notch security features, user-friendly interface, and compatibility with multiple cryptocurrencies.",
-    image: "/images/ELLIPAL_Titain_mini-3.png",
+    image: "/images/ELLIPAL_Titan_2.0-3.png",
     rating: 3.5,
     qty: 1,
   },
