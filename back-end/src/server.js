@@ -64,11 +64,19 @@ async function start() {
   });
 
   // ------ Remove item from cart w/ DELETE callback function
-  app.delete("/cart/:productId", (req, res) => {
-    // need product ID in request params
+  app.delete("/users/:userId/cart/:productId", async (req, res) => {
+    const userId = req.params.userId;
     const productId = req.params.productId;
-    cartItems = cartItems.filter((id) => id.toString() !== productId);
-    const populatedCart = populatedCartIds(cartItems);
+    await db.collection("users").updateOne(
+      { id: userId },
+      {
+        $pull: { cartItems: productId },
+      }
+    );
+    const user = await db
+      .collection("users")
+      .findOne({ id: req.params.userId });
+    const populatedCart = await populatedCartIds(user.cartItems); // passing cartItems as ids argument
     res.json(populatedCart);
   });
 
