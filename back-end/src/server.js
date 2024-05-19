@@ -46,11 +46,20 @@ async function start() {
   });
 
   // ------ Add item to cart w/ POST callback function
-  app.post("/cart", (req, res) => {
+  app.post("/users/:userId/cart", async (req, res) => {
+    const userId = req.params.userId;
     const productId = req.body.id;
-    // push the item into cart directly using productId
-    cartItems.push(productId);
-    const populatedCart = populatedCartIds(cartItems);
+
+    await db.collection("users").updateOne(
+      { id: userId },
+      {
+        $addToSet: { cartItems: productId }, // $addToSet doesn't add duplicate like $push
+      }
+    );
+    const user = await db
+      .collection("users")
+      .findOne({ id: req.params.userId });
+    const populatedCart = await populatedCartIds(user.cartItems); // passing cartItems as ids argument
     res.json(populatedCart);
   });
 
@@ -58,11 +67,8 @@ async function start() {
   app.delete("/cart/:productId", (req, res) => {
     // need product ID in request params
     const productId = req.params.productId;
-    console.log(productId);
     cartItems = cartItems.filter((id) => id.toString() !== productId);
-    console.log(cartItems);
     const populatedCart = populatedCartIds(cartItems);
-    console.log(populatedCart);
     res.json(populatedCart);
   });
 
