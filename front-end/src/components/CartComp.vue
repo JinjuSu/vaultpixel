@@ -16,7 +16,7 @@
         <div class="card border-0 shadow-none text-start bg-transparent">
           <div class="card-body">
             <p>{{ product.name }}</p>
-            <p>{{ product.price }}</p>
+            <p>AU$ {{ product.price }}</p>
           </div>
         </div>
       </div>
@@ -27,9 +27,11 @@
             <!-- Decrenmentor and tncrementor tool group -->
             <div class="row">
               <div class="col-auto">Qty.</div>
-              <!-- Minus icon -->
+
               <div class="col-auto">
+                <!-- Tool border -->
                 <div class="row border rounded">
+                  <!-- Minus icon -->
                   <div class="col-auto">
                     <a v-mdb-ripple>
                       <i
@@ -61,7 +63,7 @@
       </div>
       <div class="col-8 col-md-3">
         <!-- Third card goes here -->
-        <div class="card border-0 shadow-none text-start bg-transparent">
+        <div class="card border-0 shadow-none text-end bg-transparent">
           <div class="card-body">
             <p>AU$ {{ product.price }}</p>
           </div>
