@@ -73,6 +73,8 @@
 </template>
 
 <script>
+import { cartItems } from "@/assets/product-details/products";
+
 import {
   MDBContainer,
   MDBCol,
@@ -106,8 +108,18 @@ export default {
   directives: {
     mdbRipple,
   },
+  methods: {
+    addFunction(product) {
+      return product.qty++;
+    },
+    deductFunction(product) {
+      if (product.qty > 0) {
+        return product.qty--;
+      }
+    },
+  },
   mounted() {
-    console.log("cartItems in Cart Component: ", this.cartItems);
+    console.log("cartItems in Cart Comp: ", cartItems);
   },
 };
 </script>
