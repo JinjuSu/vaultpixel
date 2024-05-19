@@ -1,3 +1,4 @@
+import { MongoClient } from "mongodb";
 import express from "express";
 import {
   cartItems as cartItemsRaw,
@@ -6,6 +7,9 @@ import {
 
 let cartItems = cartItemsRaw;
 let products = productsRaw;
+
+const mongodbURL = `mongodb+srv://vaultpixel-db:769s46jD1a2fLPNK@database1.sqf5wlh.mongodb.net/?retryWrites=true&w=majority&appName=Database1`;
+const client = new MongoClient(mongodbURL);
 
 const app = express();
 
