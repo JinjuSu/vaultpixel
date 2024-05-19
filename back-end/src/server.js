@@ -8,40 +8,53 @@ import {
 let cartItems = cartItemsRaw;
 let products = productsRaw;
 
+async function populatedCartIds(ids) {
+  await client.connect();
+  const db = client.db("vaultpixel-db");
+  return Promise.all(
+    ids.map((id) => db.collection("products").findOne({ id })) //equivalent to using map() in API calling level
+  );
+}
+
 const mongodbURL = `mongodb+srv://vaultpixel-db:769s46jD1a2fLPNK@database1.sqf5wlh.mongodb.net/?retryWrites=true&w=majority&appName=Database1`;
 const client = new MongoClient(mongodbURL);
 
 const app = express();
-
-function populatedCartIds(ids) {
-  return ids.map((id) => products.find((product) => product.id === id));
-}
-
 // need this to use .body (for POST request)
 app.use(express.json());
 
-app.get("/hello", (req, res) => {
-  res.send("Hello from server.js");
+// app.get("/hello", async (req, res) => {
+//   await client.connect();
+//   const db = client.db("vaultpixel-db"); //name of the database as arg
+//   const products = await db.collection("products").find({}).toArray();
+//   res.send(products);
+// });
+
+// ------ Read items in the database using app.get() call back
+app.get("/products", async (req, res) => {
+  await client.connect();
+  const db = client.db("vaultpixel-db"); //name of the database as arg
+  const products = await db.collection("products").find({}).toArray();
+  res.send(products);
 });
 
-app.get("/products", (req, res) => {
-  res.json(products);
-});
-
-app.get("/cart", (req, res) => {
-  const populatedCart = populatedCartIds(cartItems); // passing cartItems as ids argument
+app.get("/users/:userId/cart", async (req, res) => {
+  await client.connect();
+  const db = client.db("vaultpixel-db");
+  const user = await db.collection("users").findOne({ id: req.params.userId });
+  const populatedCart = await populatedCartIds(user.cartItems); // passing cartItems as ids argument
   res.json(populatedCart);
 });
 
-app.get("/product/:productId", (req, res) => {
+app.get("/product/:productId", async (req, res) => {
+  await client.connect();
+  const db = client.db("vaultpixel-db");
   const productId = req.params.productId;
-  const product = products.find(
-    (product) => product.id.toString() === productId
-  );
+  const product = await db.collection("products").findOne({ id: productId });
   res.json(product);
 });
 
-// Add item to cart w/ POST callback function
+// ------ Add item to cart w/ POST callback function
 app.post("/cart", (req, res) => {
   const productId = req.body.id;
   // push the item into cart directly using productId
@@ -50,7 +63,7 @@ app.post("/cart", (req, res) => {
   res.json(populatedCart);
 });
 
-// Remove item from cart w/ DELETE callback function
+// ------ Remove item from cart w/ DELETE callback function
 app.delete("/cart/:productId", (req, res) => {
   // need product ID in request params
   const productId = req.params.productId;
