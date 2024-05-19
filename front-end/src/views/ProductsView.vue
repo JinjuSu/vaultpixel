@@ -1,8 +1,9 @@
 <template>
   <div class="container my-5">
-    <!-- Search bar -->
+    <!-- Search bar section -->
 
     <MDBInput class="mb-4" v-model="searchProduct" placeholder="Search" />
+    <!-- Product section -->
     <div class="row mb-4">
       <div class="col-3">
         <!-- Filter column -->
@@ -13,12 +14,12 @@
       <div class="col">
         <div class="row">
           <div
-            class="col-4"
+            class="col-lg-4 col-md-6 col-sm-12"
             v-for="product in paginatedProducts"
             :key="product.id"
           >
             <div class="card grid-wrap">
-              <div class="card-header text-center">
+              <div class="image-card-product text-center">
                 <img class="image-product" :src="product.image" />
               </div>
               <div class="card-body">
@@ -39,31 +40,32 @@
         </div>
       </div>
     </div>
-  </div>
-  <div class="container">
-    <nav aria-label="Page navigation example">
-      <MDBPagination>
-        <MDBPageNav
-          prev
-          :disabled="currentPage === 1"
-          @click="changePage(currentPage - 1)"
-        ></MDBPageNav>
-        <MDBPageItem
-          v-for="n in totalPages"
-          :key="n"
-          :class="{ active: n === currentPage }"
-        >
-          <a class="page-link" href="#" @click.prevent="changePage(n)">{{
-            n
-          }}</a>
-        </MDBPageItem>
-        <MDBPageNav
-          next
-          :disabled="currentPage === totalPages"
-          @click="changePage(currentPage + 1)"
-        ></MDBPageNav>
-      </MDBPagination>
-    </nav>
+    <!-- Pagination section -->
+    <div class="row my-5">
+      <nav aria-label="Page navigation example">
+        <MDBPagination class="justify-content-end text-end">
+          <MDBPageNav
+            prev
+            :disabled="currentPage === 1"
+            @click="changePage(currentPage - 1)"
+          ></MDBPageNav>
+          <MDBPageItem
+            v-for="n in totalPages"
+            :key="n"
+            :class="{ active: n === currentPage }"
+          >
+            <a class="page-link" href="#" @click.prevent="changePage(n)">{{
+              n
+            }}</a>
+          </MDBPageItem>
+          <MDBPageNav
+            next
+            :disabled="currentPage === totalPages"
+            @click="changePage(currentPage + 1)"
+          ></MDBPageNav>
+        </MDBPagination>
+      </nav>
+    </div>
   </div>
 </template>
 
