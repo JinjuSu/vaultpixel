@@ -7,7 +7,7 @@
         <div
           class="card border-0 shadow-none text-end image-product bg-transparent d-flex justify-content-end"
         >
-          <img :src="product.image" class="img-fluid rounded-start" />
+          <img :src="product.imageUrl" class="img-fluid rounded-start" />
         </div>
       </div>
 
