@@ -1,3 +1,4 @@
+import { MongoClient } from "mongodb";
 import express from "express";
 import {
   cartItems as cartItemsRaw,
@@ -7,57 +8,81 @@ import {
 let cartItems = cartItemsRaw;
 let products = productsRaw;
 
-const app = express();
+// Connect MongoDB when the server is started
+async function start() {
+  const mongodbURL = `mongodb+srv://vaultpixel-db:769s46jD1a2fLPNK@database1.sqf5wlh.mongodb.net/?retryWrites=true&w=majority&appName=Database1`;
+  const client = new MongoClient(mongodbURL);
 
-function populatedCartIds(ids) {
-  return ids.map((id) => products.find((product) => product.id === id));
+  await client.connect();
+  const db = client.db("vaultpixel-db");
+
+  const app = express();
+  app.use(express.json());
+
+  async function populatedCartIds(ids) {
+    return Promise.all(
+      ids.map((id) => db.collection("products").findOne({ id })) //equivalent to using map() in API calling level
+    );
+  }
+
+  // ------ Read items in the database using app.get() call back
+  app.get("/products", async (req, res) => {
+    const products = await db.collection("products").find({}).toArray();
+    res.send(products);
+  });
+
+  app.get("/users/:userId/cart", async (req, res) => {
+    const user = await db
+      .collection("users")
+      .findOne({ id: req.params.userId });
+    const populatedCart = await populatedCartIds(user.cartItems); // passing cartItems as ids argument
+    res.json(populatedCart);
+  });
+
+  app.get("/product/:productId", async (req, res) => {
+    const productId = req.params.productId;
+    const product = await db.collection("products").findOne({ id: productId });
+    res.json(product);
+  });
+
+  // ------ Add item to cart w/ POST callback function
+  app.post("/users/:userId/cart", async (req, res) => {
+    const userId = req.params.userId;
+    const productId = req.body.id;
+
+    await db.collection("users").updateOne(
+      { id: userId },
+      {
+        $addToSet: { cartItems: productId }, // $addToSet doesn't add duplicate like $push
+      }
+    );
+    const user = await db
+      .collection("users")
+      .findOne({ id: req.params.userId });
+    const populatedCart = await populatedCartIds(user.cartItems); // passing cartItems as ids argument
+    res.json(populatedCart);
+  });
+
+  // ------ Remove item from cart w/ DELETE callback function
+  app.delete("/users/:userId/cart/:productId", async (req, res) => {
+    const userId = req.params.userId;
+    const productId = req.params.productId;
+    await db.collection("users").updateOne(
+      { id: userId },
+      {
+        $pull: { cartItems: productId },
+      }
+    );
+    const user = await db
+      .collection("users")
+      .findOne({ id: req.params.userId });
+    const populatedCart = await populatedCartIds(user.cartItems); // passing cartItems as ids argument
+    res.json(populatedCart);
+  });
+
+  app.listen(8000, () => {
+    console.log("Server is listening on port 8000");
+  });
 }
 
-// need this to use .body (for POST request)
-app.use(express.json());
-
-app.get("/hello", (req, res) => {
-  res.send("Hello from server.js");
-});
-
-app.get("/products", (req, res) => {
-  res.json(products);
-});
-
-app.get("/cart", (req, res) => {
-  const populatedCart = populatedCartIds(cartItems); // passing cartItems as ids argument
-  res.json(populatedCart);
-});
-
-app.get("/product/:productId", (req, res) => {
-  const productId = req.params.productId;
-  const product = products.find(
-    (product) => product.id.toString() === productId
-  );
-  res.json(product);
-});
-
-// Add item to cart w/ POST callback function
-app.post("/cart", (req, res) => {
-  const productId = req.body.id;
-  // push the item into cart directly using productId
-  cartItems.push(productId);
-  const populatedCart = populatedCartIds(cartItems);
-  res.json(populatedCart);
-});
-
-// Remove item from cart w/ DELETE callback function
-app.delete("/cart/:productId", (req, res) => {
-  // need product ID in request params
-  const productId = req.params.productId;
-  console.log(productId);
-  cartItems = cartItems.filter((id) => id.toString() !== productId);
-  console.log(cartItems);
-  const populatedCart = populatedCartIds(cartItems);
-  console.log(populatedCart);
-  res.json(populatedCart);
-});
-
-app.listen(8000, () => {
-  console.log("Server is listening on port 8000");
-});
+start();

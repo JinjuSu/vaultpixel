@@ -68,7 +68,9 @@ export default {
   },
   mounted() {
     const productId = this.$route.params.id;
-    this.product = products.find((product) => product.toString() === productId);
+    this.product = products.find(
+      (product) => product.id.toString() === productId
+    );
     console.log("Product ID:", productId);
     console.log("Product Details:", this.product);
   },
