@@ -20,7 +20,7 @@
           >
             <div class="card grid-wrap">
               <div class="image-card-product text-center">
-                <img class="image-product" :src="product.image" />
+                <img class="image-product" :src="product.imageURL" />
               </div>
               <div class="card-body">
                 <h5 class="card-title">{{ product.name }}</h5>
