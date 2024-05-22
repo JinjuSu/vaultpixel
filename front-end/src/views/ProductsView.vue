@@ -174,8 +174,8 @@ export default {
     const response = await axios.get(`/api/products`);
     const products = response.data; // responses with products from MongoDB
     this.products = products; // Stores the products in this products.list
-    console.log("Responded products: ", products);
-    console.log("This producst: ", this.products);
+    // console.log("Responded products: ", products);
+    // console.log("This producst: ", this.products);
   },
 };
 </script>

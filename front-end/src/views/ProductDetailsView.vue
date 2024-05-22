@@ -7,7 +7,7 @@
             <img
               class="img-fluid rounded-start"
               :src="product.image"
-              alt="image-card"
+              alt="first-card"
             />
           </div>
         </div>
@@ -42,15 +42,21 @@
 <script>
 import { products } from "../assets/product-details/products.js";
 import NotFoundView from "./NotFoundView.vue";
-import axios from "axios";
 
 export default {
   name: "ProductDetailsView",
   data() {
     return {
       products,
-
-      product: {},
+      product: {
+        id: "",
+        name: "",
+        price: "",
+        description: "",
+        rating: "",
+        image: "",
+        qty: "",
+      },
     };
   },
   computed: {
@@ -70,13 +76,6 @@ export default {
   },
   components: {
     NotFoundView,
-  },
-  async created() {
-    const response = await axios.get(
-      `/api/products/${this.$route.params.productId}`
-    );
-    const product = response.data;
-    this.product = product;
   },
 };
 </script>
