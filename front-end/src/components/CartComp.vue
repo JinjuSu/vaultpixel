@@ -55,7 +55,13 @@
               </div>
               <!-- remove icon -->
               <div class="col">
-                <i class="fas fa-trash-alt image-icon-trash"></i>
+                <div
+                  v-mdb-ripple
+                  class="btn btn-light px-0 py-0"
+                  @click="$emit('remove-from-cart', product.id)"
+                >
+                  <i class="fas fa-trash-alt image-icon-trash" />
+                </div>
               </div>
             </div>
           </div>

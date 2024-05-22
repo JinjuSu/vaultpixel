@@ -2,7 +2,10 @@
   <MDBContainer bg="light ">
     <div class="container py-5" v-if="cartItems.length > 0">
       <!-- Cart Component with binded props -->
-      <CartComp :cartItems="cartItems" />
+      <CartComp
+        @remove-from-cart="removeFromCart($event)"
+        :cartItems="cartItems"
+      />
       <!-- Proceed button (outside the loop) -->
       <div class="my-5">
         <a
@@ -77,6 +80,11 @@ export default {
       if (product.qty > 0) {
         return product.qty--;
       }
+    },
+    async removeFromCart(productId) {
+      const response = await axios.delete(`/api/users/0001/cart/${productId}`);
+      const updatedCart = response.data;
+      this.cartItems = updatedCart;
     },
   },
   async created() {
