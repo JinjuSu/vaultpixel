@@ -73,14 +73,6 @@ export default {
     mdbRipple,
   },
   methods: {
-    addFunction(product) {
-      return product.qty++;
-    },
-    deductFunction(product) {
-      if (product.qty > 0) {
-        return product.qty--;
-      }
-    },
     async removeFromCart(productId) {
       const response = await axios.delete(`/api/users/0001/cart/${productId}`);
       const updatedCart = response.data;

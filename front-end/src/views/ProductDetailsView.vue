@@ -20,7 +20,7 @@
             <p>{{ product.price }}</p>
             <p>rating: {{ product.rating }}/5</p>
           </div>
-          <div class="button" @click="addToCart">
+          <div class="button" @click="addToCart" v-if="!itemIsInCart">
             <a
               href="#!"
               class="btn btn-sm btn-dark button-shop"
@@ -28,6 +28,9 @@
             >
               Add to cart
             </a>
+          </div>
+          <div class="button btn btn-secondary button-shop" v-else>
+            Already in cart
           </div>
         </div>
       </div>
@@ -38,6 +41,7 @@
   </div>
 </template>
 <script>
+import { cartItems } from "@/assets/product-details/products";
 import NotFoundView from "./NotFoundView.vue";
 import axios from "axios";
 
@@ -46,10 +50,16 @@ export default {
   data() {
     return {
       product: {},
+      cartItems: [],
     };
   },
   components: {
     NotFoundView,
+  },
+  computed: {
+    itemIsInCart() {
+      return this.cartItems.some((item) => item.id === this.$route.params.id);
+    },
   },
   methods: {
     async addToCart() {
@@ -65,6 +75,10 @@ export default {
     this.product = product;
     // console.log("Product ID:", response);
     // console.log("Product Details:", this.product);
+
+    const cartResponse = await axios.get("/api/users/0001/cart");
+    const cartItems = cartResponse.data;
+    this.cartItems = cartItems;
   },
 };
 </script>
