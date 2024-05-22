@@ -2,7 +2,12 @@
   <div class="container my-5">
     <!-- Search bar section -->
 
-    <MDBInput class="mb-4" v-model="searchProduct" placeholder="Search" />
+    <MDBInput
+      class="mb-4"
+      v-model="searchProduct"
+      placeholder="Search"
+      type="search"
+    />
     <!-- Product section -->
     <div class="row mb-4">
       <div class="col-3">

@@ -111,8 +111,10 @@ export default {
       return product.qty++;
     },
     deductFunction(product) {
-      if (product.qty > 0) {
+      if (product.qty > 1) {
         return product.qty--;
+      } else {
+        this.$emit("remove-from-cart", product.id); // Emit event to remove item
       }
     },
   },

@@ -48,7 +48,8 @@
         />
         <MDBBtn outline="primary"> Search </MDBBtn>
       </form> -->
-      <MDBBtn color="dark">Sign up</MDBBtn>
+
+      <MDBBtn color="dark"> Sign up</MDBBtn>
       <MDBBtn outline="dark">Log in</MDBBtn>
       <!-- Cart icon logic -->
 
