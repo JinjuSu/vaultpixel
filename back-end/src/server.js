@@ -19,7 +19,7 @@ async function start() {
 
   const app = express();
   app.use(express.json());
-  app.use("/images", express.static(path.join(__dirname, "../assets"))); // This should enable Express server to serve images for the front-end
+  app.use("/images", express.static(path.join(__dirname, "../assets/wallets"))); // This should enable Express server to serve images for the front-end
 
   async function populatedCartIds(ids) {
     return Promise.all(
