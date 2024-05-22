@@ -114,6 +114,7 @@ import {
   MDBPageItem,
 } from "mdb-vue-ui-kit";
 import { ref } from "vue";
+//import { products } from "../assets/product-details/products.js";
 
 export default {
   name: "FilterComp",
@@ -139,9 +140,6 @@ export default {
       collapse2,
       collapse3,
     };
-  },
-  props: {
-    msg: String,
   },
 };
 </script>

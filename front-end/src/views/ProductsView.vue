@@ -2,7 +2,12 @@
   <div class="container my-5">
     <!-- Search bar section -->
 
-    <MDBInput class="mb-4" v-model="searchProduct" placeholder="Search" />
+    <MDBInput
+      class="mb-4"
+      v-model="searchProduct"
+      placeholder="Search"
+      type="search"
+    />
     <!-- Product section -->
     <div class="row mb-4">
       <div class="col-3">
@@ -20,7 +25,7 @@
           >
             <div class="card grid-wrap">
               <div class="image-card-product text-center">
-                <img class="image-product" :src="product.image" />
+                <img class="image-product" :src="product.imageURL" />
               </div>
               <div class="card-body">
                 <h5 class="card-title">{{ product.name }}</h5>
@@ -81,14 +86,16 @@ import {
   MDBPageItem,
 } from "mdb-vue-ui-kit";
 import { ref, computed } from "vue";
-import { products } from "../assets/product-details/products.js";
+// import { products } from "../assets/product-details/products.js";
 
 import FilterComp from "../components/FilterComp.vue";
+import axios from "axios";
 
 export default {
   name: "Products",
   data() {
     return {
+      products: [],
       searchProduct: {
         id: "",
         name: "",
@@ -96,7 +103,6 @@ export default {
         description: "",
         img: "",
       },
-      products,
       test: "test printing",
     };
   },
@@ -112,12 +118,27 @@ export default {
     FilterComp,
   },
   setup() {
+    const products = ref([]);
     const searchProduct = ref("");
     const currentPage = ref(1);
     const itemsPerPage = ref(6);
 
+    // Fetch products from API and store them in the products reactive variable
+    async function fetchProducts() {
+      try {
+        const response = await axios.get(`/api/products`);
+        products.value = response.data; // Assign the response data to products
+        console.log("Fetched products:", products.value);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
+    }
+
+    // Call fetchProducts when component is mounted
+    fetchProducts();
+
     const filteredProducts = computed(() => {
-      return products.filter((product) =>
+      return products.value.filter((product) =>
         product.name.toLowerCase().includes(searchProduct.value.toLowerCase())
       );
     });
@@ -153,6 +174,13 @@ export default {
           .includes(this.searchProduct.toLowerCase());
       });
     },
+  },
+  async created() {
+    const response = await axios.get(`/api/products`);
+    const products = response.data; // responses with products from MongoDB
+    this.products = products; // Stores the products in this products.list
+    // console.log("Responded products: ", products);
+    // console.log("This producst: ", this.products);
   },
 };
 </script>

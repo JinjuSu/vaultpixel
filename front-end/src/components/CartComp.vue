@@ -7,7 +7,7 @@
         <div
           class="card border-0 shadow-none text-end image-product bg-transparent d-flex justify-content-end"
         >
-          <img :src="product.image" class="img-fluid rounded-start" />
+          <img :src="product.imageURL" class="img-fluid rounded-start" />
         </div>
       </div>
 
@@ -55,7 +55,13 @@
               </div>
               <!-- remove icon -->
               <div class="col">
-                <i class="fas fa-trash-alt image-icon-trash"></i>
+                <div
+                  v-mdb-ripple
+                  class="btn btn-light px-0 py-0"
+                  @click="$emit('remove-from-cart', product.id)"
+                >
+                  <i class="fas fa-trash-alt image-icon-trash" />
+                </div>
               </div>
             </div>
           </div>
@@ -88,17 +94,7 @@ import {
 export default {
   name: "CartComp",
   props: {
-    msg: String,
     cartItems: {},
-    product: {
-      id: "",
-      name: "",
-      price: "",
-      description: "",
-      rating: "",
-      image: "",
-      qty: "",
-    },
   },
   components: {
     MDBContainer,
@@ -115,8 +111,10 @@ export default {
       return product.qty++;
     },
     deductFunction(product) {
-      if (product.qty > 0) {
+      if (product.qty > 1) {
         return product.qty--;
+      } else {
+        this.$emit("remove-from-cart", product.id); // Emit event to remove item
       }
     },
   },

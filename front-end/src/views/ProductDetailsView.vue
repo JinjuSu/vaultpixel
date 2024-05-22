@@ -6,7 +6,7 @@
           <div class="image-product-details">
             <img
               class="img-fluid rounded-start"
-              :src="product.image"
+              :src="product.imageURL"
               alt="first-card"
             />
           </div>
@@ -20,15 +20,21 @@
             <p>{{ product.price }}</p>
             <p>rating: {{ product.rating }}/5</p>
           </div>
-          <div class="">
-            <router-link :to="'/cart/' + product.id">
-              <a
-                href="#!"
-                class="btn btn-sm btn-dark button-shop"
-                data-mdb-ripple-init
-              >
-                Add to cart
-              </a></router-link
+          <div class="button" @click="addToCart" v-if="!itemIsInCart">
+            <a
+              href="#!"
+              class="btn btn-sm btn-dark button-shop"
+              data-mdb-ripple-init
+            >
+              Add to cart
+            </a>
+          </div>
+          <div class="text-start" v-else>
+            <p class="text-secondary">Item is added in cart</p>
+            <router-link to="/cart">
+              <div class="button btn btn-dark button-shop">
+                Check out
+              </div></router-link
             >
           </div>
         </div>
@@ -40,48 +46,44 @@
   </div>
 </template>
 <script>
-import { products } from "../assets/product-details/products.js";
+import { cartItems } from "@/assets/product-details/products";
 import NotFoundView from "./NotFoundView.vue";
+import axios from "axios";
 
 export default {
   name: "ProductDetailsView",
   data() {
     return {
-      products,
-      product: {
-        id: "",
-        name: "",
-        price: "",
-        description: "",
-        rating: "",
-        image: "",
-        qty: "",
-      },
+      product: {},
+      cartItems: [],
     };
-  },
-  computed: {
-    filterProducts: function () {
-      return this.products.filter((product) => {
-        return product.name.toLowerCase().includes(this.product);
-      });
-    },
-  },
-  mounted() {
-    const productId = this.$route.params.id;
-    this.product = products.find(
-      (product) => product.id.toString() === productId
-    );
-    console.log("Product ID:", productId);
-    console.log("Product Details:", this.product);
   },
   components: {
     NotFoundView,
   },
+  computed: {
+    itemIsInCart() {
+      return this.cartItems.some((item) => item.id === this.$route.params.id);
+    },
+  },
+  methods: {
+    async addToCart() {
+      await axios.post(`/api/users/0001/cart`, {
+        id: this.$route.params.id,
+      });
+      alert("Successfully added item to cart!");
+    },
+  },
+  async created() {
+    const response = await axios.get(`/api/product/${this.$route.params.id}`);
+    const product = response.data;
+    this.product = product;
+    // console.log("Product ID:", response);
+    // console.log("Product Details:", this.product);
+
+    const cartResponse = await axios.get("/api/users/0001/cart");
+    const cartItems = cartResponse.data;
+    this.cartItems = cartItems;
+  },
 };
 </script>
-
-<style>
-#app {
-  font-family: Roboto, Helvetica, Arial, sans-serif;
-}
-</style>

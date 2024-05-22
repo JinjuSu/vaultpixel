@@ -2,7 +2,10 @@
   <MDBContainer bg="light ">
     <div class="container py-5" v-if="cartItems.length > 0">
       <!-- Cart Component with binded props -->
-      <CartComp :cartItems="cartItems" />
+      <CartComp
+        @remove-from-cart="removeFromCart($event)"
+        :cartItems="cartItems"
+      />
       <!-- Proceed button (outside the loop) -->
       <div class="my-5">
         <a
@@ -40,7 +43,7 @@
 
 <script>
 import CartComp from "@/components/CartComp.vue";
-import { cartItems } from "@/assets/product-details/products";
+import axios from "axios";
 import {
   MDBContainer,
   MDBCol,
@@ -54,16 +57,8 @@ export default {
   name: "Cart",
   data() {
     return {
-      cartItems,
-      product: {
-        id: "",
-        name: null,
-        price: null,
-        description: null,
-        rating: null,
-        image: null,
-        qty: null,
-      },
+      cartItems: [],
+      //product: {},
     };
   },
   components: {
@@ -78,17 +73,16 @@ export default {
     mdbRipple,
   },
   methods: {
-    addFunction(product) {
-      return product.qty++;
-    },
-    deductFunction(product) {
-      if (product.qty > 0) {
-        return product.qty--;
-      }
+    async removeFromCart(productId) {
+      const response = await axios.delete(`/api/users/0001/cart/${productId}`);
+      const updatedCart = response.data;
+      this.cartItems = updatedCart;
     },
   },
-  mounted() {
-    console.log("cartItems in Cart View: ", cartItems);
+  async created() {
+    const response = await axios.get("/api/users/0001/cart");
+    const cartItems = response.data;
+    this.cartItems = cartItems;
   },
 };
 </script>
