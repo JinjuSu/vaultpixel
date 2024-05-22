@@ -40,7 +40,7 @@
 
 <script>
 import CartComp from "@/components/CartComp.vue";
-import { cartItems } from "@/assets/product-details/products";
+import axios from "axios";
 import {
   MDBContainer,
   MDBCol,
@@ -54,16 +54,8 @@ export default {
   name: "Cart",
   data() {
     return {
-      cartItems,
-      product: {
-        id: "",
-        name: null,
-        price: null,
-        description: null,
-        rating: null,
-        image: null,
-        qty: null,
-      },
+      cartItems: [],
+      //product: {},
     };
   },
   components: {
@@ -87,8 +79,10 @@ export default {
       }
     },
   },
-  mounted() {
-    console.log("cartItems in Cart View: ", cartItems);
+  async created() {
+    const response = await axios.get("/api/users/0001/cart");
+    const cartItems = response.data;
+    this.cartItems = cartItems;
   },
 };
 </script>

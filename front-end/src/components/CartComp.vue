@@ -7,7 +7,7 @@
         <div
           class="card border-0 shadow-none text-end image-product bg-transparent d-flex justify-content-end"
         >
-          <img :src="product.imageUrl" class="img-fluid rounded-start" />
+          <img :src="product.imageURL" class="img-fluid rounded-start" />
         </div>
       </div>
 
@@ -88,17 +88,7 @@ import {
 export default {
   name: "CartComp",
   props: {
-    msg: String,
     cartItems: {},
-    product: {
-      id: "",
-      name: "",
-      price: "",
-      description: "",
-      rating: "",
-      image: "",
-      qty: "",
-    },
   },
   components: {
     MDBContainer,

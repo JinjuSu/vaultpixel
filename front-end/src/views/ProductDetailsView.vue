@@ -20,16 +20,14 @@
             <p>{{ product.price }}</p>
             <p>rating: {{ product.rating }}/5</p>
           </div>
-          <div class="">
-            <router-link :to="'/cart/' + product.id">
-              <a
-                href="#!"
-                class="btn btn-sm btn-dark button-shop"
-                data-mdb-ripple-init
-              >
-                Add to cart
-              </a></router-link
+          <div class="button" @click="addToCart">
+            <a
+              href="#!"
+              class="btn btn-sm btn-dark button-shop"
+              data-mdb-ripple-init
             >
+              Add to cart
+            </a>
           </div>
         </div>
       </div>
@@ -53,6 +51,14 @@ export default {
   components: {
     NotFoundView,
   },
+  methods: {
+    async addToCart() {
+      await axios.post(`/api/users/0001/cart`, {
+        id: this.$route.params.id,
+      });
+      alert("Successfully added item to cart!");
+    },
+  },
   async created() {
     const response = await axios.get(`/api/product/${this.$route.params.id}`);
     const product = response.data;
@@ -62,9 +68,3 @@ export default {
   },
 };
 </script>
-
-<style>
-#app {
-  font-family: Roboto, Helvetica, Arial, sans-serif;
-}
-</style>

@@ -1,6 +1,10 @@
 <template>
   <MDBNavbar expand="lg" light bg="light" container>
-    <MDBNavbarBrand href="#" class="fw-bold">VaultPixel</MDBNavbarBrand>
+    <MDBNavbarBrand href="#" class="fw-bold"
+      ><router-link class="link-text" to="/products"
+        >VaultPixel</router-link
+      ></MDBNavbarBrand
+    >
     <MDBNavbarToggler
       @click="collapse1 = !collapse1"
       target="#navbarSupportedContent"
