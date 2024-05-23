@@ -95,7 +95,7 @@ export default {
   },
   methods: {
     async addToCart() {
-      await axios.post(`/api/users/0001/cart`, {
+      await axios.post(`/api/users/${this.user.uid}/cart`, {
         id: this.$route.params.id,
       });
       alert("Successfully added item to cart!");
