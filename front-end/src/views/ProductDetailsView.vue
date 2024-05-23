@@ -29,6 +29,15 @@
               Add to cart
             </a>
           </div>
+          <div class="button" @click="signIn" v-if="!itemIsInCart">
+            <a
+              href="#!"
+              class="btn btn-sm btn-dark button-shop"
+              data-mdb-ripple-init
+            >
+              Sign in to add to cart
+            </a>
+          </div>
           <div class="text-start" v-else>
             <p class="text-secondary">Item is added in cart</p>
             <router-link to="/cart">
@@ -49,6 +58,12 @@
 import { cartItems } from "@/assets/product-details/products";
 import NotFoundView from "./NotFoundView.vue";
 import axios from "axios";
+import {
+  getAuth,
+  sendSignInLinkToEmail,
+  signInWithEmailLink,
+  isSignInWithEmailLink,
+} from "firebase/auth";
 
 export default {
   name: "ProductDetailsView",
@@ -73,8 +88,27 @@ export default {
       });
       alert("Successfully added item to cart!");
     },
+    async signIn() {
+      const email = prompt("Please enter your email to sign in");
+      const auth = getAuth();
+      const actionCodeSettings = {
+        url: `https://fj16bq7r-8080.aue.devtunnels.ms/product/${this.$route.params.id}`,
+        handleCodeInApp: true,
+      };
+      await sendSignInLinkToEmail(auth, email, actionCodeSettings);
+      alert("A login link was sent to the email you provided");
+      window.localStorage.setItem("emailForSignIn", email);
+    },
   },
   async created() {
+    const auth = getAuth();
+    if (isSignInWithEmailLink(auth, window.location.href)) {
+      const email = window.localStorage.getItem("emailForSignIn");
+      await signInWithEmailLink(auth, email, window.location.href);
+      alert("Successfully signed in");
+      window.localStorage.removeItem("emailForSignIn");
+    }
+
     const response = await axios.get(`/api/product/${this.$route.params.id}`);
     const product = response.data;
     this.product = product;
