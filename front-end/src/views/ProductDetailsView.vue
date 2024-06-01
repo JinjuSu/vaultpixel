@@ -55,7 +55,6 @@
   </div>
 </template>
 <script>
-import { cartItems } from "@/assets/product-details/products";
 import NotFoundView from "./NotFoundView.vue";
 import axios from "axios";
 import {

@@ -8,13 +8,15 @@
       />
       <!-- Proceed button (outside the loop) -->
       <div class="my-5">
-        <a
-          href="#!"
-          class="btn btn-sm btn-dark button-shop"
-          data-mdb-ripple-init
-        >
-          Proceed to check out
-        </a>
+        <router-link :to="'/payment'">
+          <a
+            href="#!"
+            class="btn btn-sm btn-dark button-shop"
+            data-mdb-ripple-init
+          >
+            Proceed to payment
+          </a>
+        </router-link>
       </div>
     </div>
     <div v-else-if="cartItems.length === 0" class="container my-5 text-center">
