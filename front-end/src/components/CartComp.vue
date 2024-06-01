@@ -16,7 +16,7 @@
         <div class="card border-0 shadow-none text-start bg-transparent">
           <div class="card-body">
             <p>{{ product.name }}</p>
-            <p>AU$ {{ product.price }}</p>
+            <p>{{ product.price }} AUD</p>
           </div>
         </div>
       </div>
@@ -71,17 +71,26 @@
         <!-- Third card goes here -->
         <div class="card border-0 shadow-none text-end bg-transparent">
           <div class="card-body">
-            <p>AU$ {{ product.price }}</p>
+            <p class="fw-bold">Total</p>
+            <p>{{ product.price }} AUD</p>
           </div>
         </div>
       </div>
+      <hr />
     </div>
-    <hr />
+    <div class="row justify-content-between my-3">
+      <div class="col-auto">
+        <h1>Total</h1>
+      </div>
+      <div class="col-auto">
+        <h1>Summed amount AUD</h1>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import { cartItems } from "@/assets/product-details/products";
+// import { cartItems } from "@/assets/product-details/products";
 
 import {
   MDBContainer,
@@ -94,7 +103,7 @@ import {
 export default {
   name: "CartComp",
   props: {
-    cartItems: {},
+    cartItems: {}, // passed down from CartView.vue
   },
   components: {
     MDBContainer,

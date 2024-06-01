@@ -52,16 +52,16 @@ async function start() {
     const userId = req.params.userId;
     const productId = req.body.id;
 
-    const existingUser = await db.collection("users").findOne({ id: userId });
+    const existingUser = await db.collection("users").findOne({ id: userId }); // id in MongoBD's user collection that is equal to userId from firebaseAuth
 
     if (!existingUser) {
-      await db.collection("users").insertOne({ id: userId, cartItems: [] });
+      await db.collection("users").insertOne({ id: userId, cartItems: [] }); // If not there already, insert into the collection.
     }
 
     await db.collection("users").updateOne(
       { id: userId },
       {
-        $addToSet: { cartItems: productId }, // $addToSet doesn't add duplicate like $push
+        $addToSet: { cartItems: productId }, // $addToSet doesn't add duplicate items like $push
       }
     );
     const user = await db
