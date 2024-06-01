@@ -5,45 +5,40 @@
         >VaultPixel</router-link
       ></MDBNavbarBrand
     >
-    <MDBNavbarToggler
-      @click="collapse1 = !collapse1"
-      target="#navbarSupportedContent"
-    ></MDBNavbarToggler>
-    <MDBCollapse v-model="collapse1" id="navbarSupportedContent">
-      <MDBNavbarNav class="mb-2 mb-lg-0">
-        <MDBNavbarItem to="#" active>
-          <router-link class="link-text" to="/">Home</router-link>
-        </MDBNavbarItem>
-        <MDBNavbarItem href="#">
-          <router-link class="link-text" to="/products">Products</router-link>
-        </MDBNavbarItem>
-        <MDBNavbarItem href="#">
-          <router-link class="link-text" to="/about">About</router-link>
-        </MDBNavbarItem>
-      </MDBNavbarNav>
 
-      <div>
-        <MDBBtn color="dark" @click="signOut" v-if="user"> Log out</MDBBtn>
-      </div>
+    <MDBNavbarNav class="mb-2 mb-lg-0">
+      <MDBNavbarItem to="#" active>
+        <router-link class="link-text" to="/">Home</router-link>
+      </MDBNavbarItem>
+      <MDBNavbarItem href="#">
+        <router-link class="link-text" to="/products">Products</router-link>
+      </MDBNavbarItem>
+      <MDBNavbarItem href="#">
+        <router-link class="link-text" to="/about">About</router-link>
+      </MDBNavbarItem>
+    </MDBNavbarNav>
 
-      <!-- <MDBBtn color="dark"> Sign up</MDBBtn> -->
-      <MDBBtn outline="dark" @click="signIn" v-if="!user">Log in</MDBBtn>
-      <!-- Cart icon logic -->
+    <div>
+      <MDBBtn color="dark" @click="signOut" v-if="user"> Log out</MDBBtn>
+    </div>
 
-      <MDBBtn v-if="cartItems.length > 0" color="light"
-        ><router-link to="/cart"
-          ><img
-            class="image-icon-cart"
-            src="../assets/icons/cart-item-icon.png" /></router-link
-      ></MDBBtn>
+    <!-- <MDBBtn color="dark"> Sign up</MDBBtn> -->
+    <MDBBtn outline="dark" @click="signIn" v-if="!user">Log in</MDBBtn>
+    <!-- Cart icon logic -->
 
-      <MDBBtn v-else-if="cartItems.length === 0" color="light"
-        ><router-link to="/cart"
-          ><img
-            class="image-icon-cart"
-            src="../assets/icons/cart-icon.png" /></router-link
-      ></MDBBtn>
-    </MDBCollapse>
+    <MDBBtn v-if="cartItems.length > 0" color="light"
+      ><router-link to="/cart"
+        ><img
+          class="image-icon-cart"
+          src="../assets/icons/cart-item-icon.png" /></router-link
+    ></MDBBtn>
+
+    <MDBBtn v-else-if="cartItems.length === 0" color="light"
+      ><router-link to="/cart"
+        ><img
+          class="image-icon-cart"
+          src="../assets/icons/cart-icon.png" /></router-link
+    ></MDBBtn>
   </MDBNavbar>
 </template>
 <!-- Navbar script -->
@@ -71,6 +66,7 @@ import {
   isSignInWithEmailLink,
   signOut,
 } from "firebase/auth";
+import axios from "axios";
 
 export default {
   name: "NavbarComp",
@@ -93,14 +89,7 @@ export default {
     MDBDropdownMenu,
     MDBDropdownItem,
   },
-  setup() {
-    const collapse1 = ref(false);
-    const dropdown1 = ref(false);
-    return {
-      collapse1,
-      dropdown1,
-    };
-  },
+  setup() {},
   methods: {
     signOut() {
       const auth = getAuth();
