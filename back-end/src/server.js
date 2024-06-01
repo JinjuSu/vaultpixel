@@ -44,7 +44,11 @@ async function start() {
         .sort({ orderId: -1 })
         .limit(1)
         .toArray();
-      res.send(lastOrder[0]);
+      if (lastOrder.length === 0) {
+        res.status(404).send("No orders found");
+      } else {
+        res.send(lastOrder[0]);
+      }
     } catch (error) {
       console.error("Failed to fetch last order:", error);
       res.status(500).send("Internal Server Error");
