@@ -1,4 +1,3 @@
-<!-- Not working -->
 <template>
   <div v-for="product in cartItems" :key="product.id">
     <div class="row justify-content-center text-center">
@@ -24,7 +23,7 @@
         <!-- Third card goes here -->
         <div class="card border-0 shadow-none text-start bg-transparent">
           <div class="card-body">
-            <!-- Decrenmentor and tncrementor tool group -->
+            <!-- Decrementor and incrementor tool group -->
             <div class="row">
               <div class="col-auto">Qty.</div>
 
@@ -93,8 +92,9 @@ import {
 export default {
   name: "CartComp",
   props: {
-    cartItems: {}, // passed down from CartView.vue
+    cartItems: Array, // passed down from CartView.vue
   },
+  emits: ["remove-from-cart", "update-cart"], // Declare the custom events
   components: {
     MDBContainer,
     MDBCol,

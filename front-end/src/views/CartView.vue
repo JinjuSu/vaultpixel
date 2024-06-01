@@ -16,15 +16,14 @@
       </div>
       <!-- Payment button (outside the loop) -->
       <div class="my-5">
-        <router-link :to="'/payment'">
-          <a
-            href="#!"
-            class="btn btn-sm btn-dark button-shop"
-            data-mdb-ripple-init
-          >
-            Proceed to payment
-          </a>
-        </router-link>
+        <a
+          href="#!"
+          class="btn btn-sm btn-dark button-shop"
+          data-mdb-ripple-init
+          @click="proceedToPayment"
+        >
+          Proceed to payment
+        </a>
       </div>
     </div>
     <div v-else-if="cartItems.length === 0" class="container my-5 text-center">
@@ -68,7 +67,13 @@ export default {
   data() {
     return {
       cartItems: [],
-      orders: [], // Changed to an array to store orders
+      orders: {
+        orderId: null, // make this the last fecthed order's id + 1 in string
+        id: "", // change this to this current "user" passed down from prop
+        orderItems: this.cartItems,
+        address: {},
+        paydetail: {},
+      },
     };
   },
   props: ["user"], // passed down from router-view, App.vue
@@ -115,10 +120,14 @@ export default {
       try {
         const response = await axios.get(`/api/orders`);
         this.orders = response.data;
-        console.log("Orders fetched:", this.orders);
+        console.log("Fetched orders: ", this.orders);
       } catch (error) {
         console.error("Failed to fetch orders:", error);
       }
+    },
+    async proceedToPayment() {
+      await this.fetchOrders(); // Fetch orders when the button is clicked
+      // this.$router.push("/payment");
     },
   },
   async created() {
@@ -127,10 +136,6 @@ export default {
       const cartItems = response.data;
       this.cartItems = cartItems;
     }
-    await this.fetchOrders(); // Fetch orders and print to console
-  },
-  mounted() {
-    console.log("Current orders in mounted: ", this.orders);
   },
 };
 </script>
