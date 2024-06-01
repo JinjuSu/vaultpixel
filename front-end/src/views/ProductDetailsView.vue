@@ -6,7 +6,7 @@
           <div class="image-product-details">
             <img
               class="img-fluid rounded-start"
-              :src="product.imageURL"
+              :src="product.image"
               alt="first-card"
             />
           </div>
@@ -55,7 +55,6 @@
   </div>
 </template>
 <script>
-import { cartItems } from "@/assets/product-details/products";
 import NotFoundView from "./NotFoundView.vue";
 import axios from "axios";
 import {
@@ -99,7 +98,7 @@ export default {
         await axios.post(`/api/users/${this.user.uid}/cart`, {
           id: this.$route.params.id,
         });
-        alert("Successfully added item to cart!");
+        // alert("Successfully added item to cart!");
 
         // Update cartItems array immediately
         const cartResponse = await axios.get(
@@ -135,10 +134,9 @@ export default {
     const response = await axios.get(`/api/product/${this.$route.params.id}`);
     const product = response.data;
     this.product = product;
-    // console.log("Product ID:", response);
-    // console.log("Product Details:", this.product);
-    console.log("this user: ", this.user);
-    console.log("this UID: ", this.user.uid);
+    console.log("Product ID:", response);
+    console.log("Product Details:", this.product);
+
     if (this.user) {
       console.log("this user: ", this.user);
       console.log("this UID: ", this.user.uid);

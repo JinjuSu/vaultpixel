@@ -6,14 +6,23 @@
         @remove-from-cart="removeFromCart($event)"
         :cartItems="cartItems"
       />
-      <!-- Proceed button (outside the loop) -->
+      <div class="row justify-content-between my-3">
+        <div class="col-auto">
+          <h1>Total</h1>
+        </div>
+        <div class="col-auto">
+          <h1>{{ totalAmount }}</h1>
+        </div>
+      </div>
+      <!-- Payment button (outside the loop) -->
       <div class="my-5">
         <a
           href="#!"
           class="btn btn-sm btn-dark button-shop"
           data-mdb-ripple-init
+          @click="proceedToPayment"
         >
-          Proceed to check out
+          Proceed to payment
         </a>
       </div>
     </div>
@@ -58,7 +67,7 @@ export default {
   data() {
     return {
       cartItems: [],
-      //product: {},
+      purchasedOrders: [],
     };
   },
   props: ["user"], // passed down from router-view, App.vue
@@ -84,6 +93,15 @@ export default {
       }
     },
   },
+  computed: {
+    totalAmount() {
+      return this.cartItems
+        .reduce((total, product) => {
+          return total + product.price * product.qty;
+        }, 0)
+        .toFixed(2);
+    },
+  },
   methods: {
     async removeFromCart(productId) {
       const response = await axios.delete(
@@ -91,6 +109,33 @@ export default {
       );
       const updatedCart = response.data;
       this.cartItems = updatedCart;
+    },
+    async proceedToPayment() {
+      try {
+        const response = await axios.get(`/api/orders/last`);
+        const lastOrder = response.data;
+        const newOrderId = (parseInt(lastOrder.orderId) + 1).toString();
+
+        const newOrder = {
+          orderId: newOrderId,
+          userId: this.user.uid,
+          orderItems: this.cartItems,
+          address: {},
+          paymentDetails: {},
+        };
+
+        console.log("Last Order: ", lastOrder);
+        console.log("New Order Id: ", newOrderId);
+        console.log("New Order: ", newOrder);
+
+        await axios.post(`/api/orders`, newOrder);
+        await axios.put(`/api/users/${this.user.uid}/purchasedOrders`, {
+          orderId: newOrderId,
+        });
+        this.$router.push("/payment");
+      } catch (error) {
+        console.error("Failed to create new order:", error);
+      }
     },
   },
   async created() {

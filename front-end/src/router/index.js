@@ -1,10 +1,11 @@
 import { createRouter, createWebHistory } from "vue-router";
+import NotFound from "../views/NotFoundView.vue";
 import HomeView from "../views/HomeView.vue";
 import AboutView from "../views/AboutView.vue";
 import ProductsView from "../views/ProductsView.vue";
 import ProductDetailsView from "../views/ProductDetailsView.vue";
 import CartView from "../views/CartView.vue";
-import NotFound from "../views/NotFoundView.vue";
+import PaymentView from "../views/Payment.vue";
 
 const routes = [
   {
@@ -36,6 +37,11 @@ const routes = [
     path: "/cart",
     name: "cart",
     component: CartView,
+  },
+  {
+    path: "/payment",
+    name: "payment",
+    component: PaymentView,
   },
 ];
 
