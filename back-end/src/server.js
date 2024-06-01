@@ -37,7 +37,7 @@ async function start() {
     const user = await db
       .collection("users")
       .findOne({ id: req.params.userId });
-    const populatedCart = await populatedCartIds(user.cartItems); // passing cartItems as ids argument
+    const populatedCart = await populatedCartIds(user?.cartItems || []); // passing cartItems as ids argument
     res.json(populatedCart);
   });
 
@@ -52,6 +52,12 @@ async function start() {
     const userId = req.params.userId;
     const productId = req.body.id;
 
+    const existingUser = await db.collection("users").findOne({ id: userId });
+
+    if (!existingUser) {
+      await db.collection("users").insertOne({ id: userId, cartItems: [] });
+    }
+
     await db.collection("users").updateOne(
       { id: userId },
       {
@@ -61,7 +67,7 @@ async function start() {
     const user = await db
       .collection("users")
       .findOne({ id: req.params.userId });
-    const populatedCart = await populatedCartIds(user.cartItems); // passing cartItems as ids argument
+    const populatedCart = await populatedCartIds(user?.cartItems || []); // passing cartItems as ids argument
     res.json(populatedCart);
   });
 
@@ -78,7 +84,7 @@ async function start() {
     const user = await db
       .collection("users")
       .findOne({ id: req.params.userId });
-    const populatedCart = await populatedCartIds(user.cartItems); // passing cartItems as ids argument
+    const populatedCart = await populatedCartIds(user?.cartItems || []); // passing cartItems as ids argument
     res.json(populatedCart);
   });
 
