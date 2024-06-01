@@ -6,7 +6,7 @@
           <div class="image-product-details">
             <img
               class="img-fluid rounded-start"
-              :src="product.imageURL"
+              :src="product.image"
               alt="first-card"
             />
           </div>

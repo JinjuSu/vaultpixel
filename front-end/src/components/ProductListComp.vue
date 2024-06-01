@@ -5,7 +5,7 @@
       <div class="col-4" v-for="product in paginatedProducts" :key="product.id">
         <div class="card grid-wrap">
           <div class="card-header text-center">
-            <img class="image-product" :src="product.imageUrl" />
+            <img class="image-product" :src="product.image" />
           </div>
           <div class="card-body">
             <h5 class="card-title">{{ product.name }}</h5>
