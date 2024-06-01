@@ -33,7 +33,7 @@
             <label for="expiration-date">Expiration date </label>
 
             <p>
-              <input type="date" v-model="expiryDate" required />
+              <input type="date" required />
             </p>
           </div>
           <div class="col-auto">

@@ -134,10 +134,9 @@ export default {
     const response = await axios.get(`/api/product/${this.$route.params.id}`);
     const product = response.data;
     this.product = product;
-    // console.log("Product ID:", response);
-    // console.log("Product Details:", this.product);
-    console.log("this user: ", this.user);
-    console.log("this UID: ", this.user.uid);
+    console.log("Product ID:", response);
+    console.log("Product Details:", this.product);
+
     if (this.user) {
       console.log("this user: ", this.user);
       console.log("this UID: ", this.user.uid);

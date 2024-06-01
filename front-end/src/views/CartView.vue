@@ -67,6 +67,7 @@ export default {
   data() {
     return {
       cartItems: [],
+      purchasedOrders: [],
     };
   },
   props: ["user"], // passed down from router-view, App.vue
@@ -126,8 +127,12 @@ export default {
         console.log("Last Order: ", lastOrder);
         console.log("New Order Id: ", newOrderId);
         console.log("New Order: ", newOrder);
+
         await axios.post(`/api/orders`, newOrder);
-        // this.$router.push("/payment");
+        await axios.put(`/api/users/${this.user.uid}/purchasedOrders`, {
+          orderId: newOrderId,
+        });
+        this.$router.push("/payment");
       } catch (error) {
         console.error("Failed to create new order:", error);
       }
