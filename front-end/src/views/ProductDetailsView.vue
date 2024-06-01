@@ -6,7 +6,7 @@
           <div class="image-product-details">
             <img
               class="img-fluid rounded-start"
-              :src="product.imageURL"
+              :src="product.image"
               alt="first-card"
             />
           </div>
@@ -98,7 +98,7 @@ export default {
         await axios.post(`/api/users/${this.user.uid}/cart`, {
           id: this.$route.params.id,
         });
-        alert("Successfully added item to cart!");
+        // alert("Successfully added item to cart!");
 
         // Update cartItems array immediately
         const cartResponse = await axios.get(

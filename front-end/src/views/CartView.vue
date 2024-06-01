@@ -6,7 +6,15 @@
         @remove-from-cart="removeFromCart($event)"
         :cartItems="cartItems"
       />
-      <!-- Proceed button (outside the loop) -->
+      <div class="row justify-content-between my-3">
+        <div class="col-auto">
+          <h1>Total</h1>
+        </div>
+        <div class="col-auto">
+          <h1>{{ totalAmount }}</h1>
+        </div>
+      </div>
+      <!-- Payment button (outside the loop) -->
       <div class="my-5">
         <router-link :to="'/payment'">
           <a
@@ -60,7 +68,7 @@ export default {
   data() {
     return {
       cartItems: [],
-      //product: {},
+      orders: [], // Changed to an array to store orders
     };
   },
   props: ["user"], // passed down from router-view, App.vue
@@ -86,6 +94,15 @@ export default {
       }
     },
   },
+  computed: {
+    totalAmount() {
+      return this.cartItems
+        .reduce((total, product) => {
+          return total + product.price * product.qty;
+        }, 0)
+        .toFixed(2);
+    },
+  },
   methods: {
     async removeFromCart(productId) {
       const response = await axios.delete(
@@ -94,6 +111,15 @@ export default {
       const updatedCart = response.data;
       this.cartItems = updatedCart;
     },
+    async fetchOrders() {
+      try {
+        const response = await axios.get(`/api/orders`);
+        this.orders = response.data;
+        console.log("Orders fetched:", this.orders);
+      } catch (error) {
+        console.error("Failed to fetch orders:", error);
+      }
+    },
   },
   async created() {
     if (this.user) {
@@ -101,6 +127,10 @@ export default {
       const cartItems = response.data;
       this.cartItems = cartItems;
     }
+    await this.fetchOrders(); // Fetch orders and print to console
+  },
+  mounted() {
+    console.log("Current orders in mounted: ", this.orders);
   },
 };
 </script>

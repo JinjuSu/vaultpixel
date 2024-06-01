@@ -28,6 +28,20 @@ async function start() {
   }
 
   // ------ Read items in the database using app.get() call back
+
+  // Get orders from order table
+  app.get("/api/orders", async (req, res) => {
+    try {
+      const orders = await db.collection("orders").find({}).toArray();
+      console.log("Orders fetched from database:", orders);
+      res.send(orders);
+    } catch (error) {
+      console.error("Failed to fetch orders:", error);
+      res.status(500).send("Internal Server Error");
+    }
+  });
+
+  // Get products from products table
   app.get("/api/products", async (req, res) => {
     const products = await db.collection("products").find({}).toArray();
     res.send(products);

@@ -7,7 +7,7 @@
         <div
           class="card border-0 shadow-none text-end image-product bg-transparent d-flex justify-content-end"
         >
-          <img :src="product.imageURL" class="img-fluid rounded-start" />
+          <img :src="product.image" class="img-fluid rounded-start" />
         </div>
       </div>
 
@@ -72,26 +72,16 @@
         <div class="card border-0 shadow-none text-end bg-transparent">
           <div class="card-body">
             <p class="fw-bold">Total</p>
-            <p>{{ product.price }} AUD</p>
+            <p>{{ productTotalPrice(product) }} AUD</p>
           </div>
         </div>
       </div>
-      <hr />
     </div>
-    <div class="row justify-content-between my-3">
-      <div class="col-auto">
-        <h1>Total</h1>
-      </div>
-      <div class="col-auto">
-        <h1>Summed amount AUD</h1>
-      </div>
-    </div>
+    <hr />
   </div>
 </template>
 
 <script>
-// import { cartItems } from "@/assets/product-details/products";
-
 import {
   MDBContainer,
   MDBCol,
@@ -117,18 +107,23 @@ export default {
   },
   methods: {
     addFunction(product) {
-      return product.qty++;
+      product.qty++;
+      this.$emit("update-cart", product);
     },
     deductFunction(product) {
       if (product.qty > 1) {
-        return product.qty--;
+        product.qty--;
+        this.$emit("update-cart", product);
       } else {
         this.$emit("remove-from-cart", product.id); // Emit event to remove item
       }
     },
+    productTotalPrice(product) {
+      return (product.price * product.qty).toFixed(2);
+    },
   },
   mounted() {
-    console.log("cartItems in Cart Comp: ", cartItems);
+    console.log("cartItems in Cart Comp: ", this.cartItems);
   },
 };
 </script>
