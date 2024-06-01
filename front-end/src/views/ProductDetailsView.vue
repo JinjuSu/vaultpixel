@@ -20,7 +20,7 @@
             <p>{{ product.price }}</p>
             <p>rating: {{ product.rating }}/5</p>
           </div>
-          <div class="button" @click="addToCart" v-if="!itemIsInCart">
+          <div class="button" @click="addToCart" v-if="user && !itemIsInCart">
             <a
               href="#!"
               class="btn btn-sm btn-dark button-shop"
@@ -29,13 +29,22 @@
               Add to cart
             </a>
           </div>
-          <div class="text-start" v-else>
-            <p class="text-secondary">Item is added in cart</p>
+          <div class="text-start" v-if="user && itemIsInCart">
+            <p class="text-secondary">You have this item your cart!</p>
             <router-link to="/cart">
               <div class="button btn btn-dark button-shop">
                 Check out
               </div></router-link
             >
+          </div>
+          <div class="button" @click="signIn" v-if="!user">
+            <a
+              href="#!"
+              class="btn btn-sm btn-dark button-shop"
+              data-mdb-ripple-init
+            >
+              Sign in to add to cart
+            </a>
           </div>
         </div>
       </div>
@@ -49,6 +58,12 @@
 import { cartItems } from "@/assets/product-details/products";
 import NotFoundView from "./NotFoundView.vue";
 import axios from "axios";
+import {
+  getAuth,
+  sendSignInLinkToEmail,
+  signInWithEmailLink,
+  isSignInWithEmailLink,
+} from "firebase/auth";
 
 export default {
   name: "ProductDetailsView",
@@ -58,8 +73,20 @@ export default {
       cartItems: [],
     };
   },
+  props: ["user"], // passed down from router-view, App.vue
   components: {
     NotFoundView,
+  },
+  watch: {
+    async user(newUserValue) {
+      if (newUserValue) {
+        const cartResponse = await axios.get(
+          `/api/users/${newUserValue.uid}/cart`
+        );
+        const cartItems = cartResponse.data;
+        this.cartItems = cartItems;
+      }
+    },
   },
   computed: {
     itemIsInCart() {
@@ -68,22 +95,57 @@ export default {
   },
   methods: {
     async addToCart() {
-      await axios.post(`/api/users/0001/cart`, {
-        id: this.$route.params.id,
-      });
-      alert("Successfully added item to cart!");
+      try {
+        await axios.post(`/api/users/${this.user.uid}/cart`, {
+          id: this.$route.params.id,
+        });
+        alert("Successfully added item to cart!");
+
+        // Update cartItems array immediately
+        const cartResponse = await axios.get(
+          `/api/users/${this.user.uid}/cart`
+        );
+        this.cartItems = cartResponse.data;
+      } catch (error) {
+        console.error("Error adding item to cart:", error);
+        alert("Failed to add item to cart. Please try again.");
+      }
+    },
+    async signIn() {
+      const email = prompt("Please enter your email to sign in");
+      const auth = getAuth();
+      const actionCodeSettings = {
+        url: `https://fj16bq7r-8080.aue.devtunnels.ms/product/${this.$route.params.id}`,
+        handleCodeInApp: true,
+      };
+      await sendSignInLinkToEmail(auth, email, actionCodeSettings);
+      alert("A login link was sent to the email you provided");
+      window.localStorage.setItem("emailForSignIn", email);
     },
   },
   async created() {
+    const auth = getAuth();
+    if (isSignInWithEmailLink(auth, window.location.href)) {
+      const email = window.localStorage.getItem("emailForSignIn");
+      await signInWithEmailLink(auth, email, window.location.href);
+      alert("Successfully signed in");
+      window.localStorage.removeItem("emailForSignIn");
+    }
+
     const response = await axios.get(`/api/product/${this.$route.params.id}`);
     const product = response.data;
     this.product = product;
     // console.log("Product ID:", response);
     // console.log("Product Details:", this.product);
-
-    const cartResponse = await axios.get("/api/users/0001/cart");
-    const cartItems = cartResponse.data;
-    this.cartItems = cartItems;
+    console.log("this user: ", this.user);
+    console.log("this UID: ", this.user.uid);
+    if (this.user) {
+      console.log("this user: ", this.user);
+      console.log("this UID: ", this.user.uid);
+      const cartResponse = await axios.get(`/api/users/${this.user.uid}/cart`);
+      const cartItems = cartResponse.data;
+      this.cartItems = cartItems;
+    }
   },
 };
 </script>
