@@ -79,7 +79,7 @@ export default {
       cartItems,
     };
   },
-  props: ["user"], // getting user props passed down from App.vue
+  props: ["user"], // getting user props passed down from Navrbar component tag, App.vue
   components: {
     MDBBtn,
     MDBNavbar,

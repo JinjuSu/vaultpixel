@@ -30,7 +30,7 @@
             </a>
           </div>
           <div class="text-start" v-if="user && itemIsInCart">
-            <p class="text-secondary">Item is already in cart</p>
+            <p class="text-secondary">You have this item your cart!</p>
             <router-link to="/cart">
               <div class="button btn btn-dark button-shop">
                 Check out
@@ -73,7 +73,7 @@ export default {
       cartItems: [],
     };
   },
-  props: ["user"], // passed in from App.vue
+  props: ["user"], // passed down from router-view, App.vue
   components: {
     NotFoundView,
   },
