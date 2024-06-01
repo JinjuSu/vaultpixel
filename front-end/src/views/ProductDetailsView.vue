@@ -95,10 +95,21 @@ export default {
   },
   methods: {
     async addToCart() {
-      await axios.post(`/api/users/${this.user.uid}/cart`, {
-        id: this.$route.params.id,
-      });
-      alert("Successfully added item to cart!");
+      try {
+        await axios.post(`/api/users/${this.user.uid}/cart`, {
+          id: this.$route.params.id,
+        });
+        alert("Successfully added item to cart!");
+
+        // Update cartItems array immediately
+        const cartResponse = await axios.get(
+          `/api/users/${this.user.uid}/cart`
+        );
+        this.cartItems = cartResponse.data;
+      } catch (error) {
+        console.error("Error adding item to cart:", error);
+        alert("Failed to add item to cart. Please try again.");
+      }
     },
     async signIn() {
       const email = prompt("Please enter your email to sign in");
