@@ -20,34 +20,11 @@
         <MDBNavbarItem href="#">
           <router-link class="link-text" to="/about">About</router-link>
         </MDBNavbarItem>
-        <MDBNavbarItem>
-          <!-- Navbar dropdown -->
-          <MDBDropdown class="nav-item" v-model="dropdown1">
-            <MDBDropdownToggle
-              tag="a"
-              class="nav-link"
-              @click="dropdown1 = !dropdown1"
-              >Dropdown</MDBDropdownToggle
-            >
-            <MDBDropdownMenu aria-labelledby="dropdownMenuButton">
-              <MDBDropdownItem href="#">Action</MDBDropdownItem>
-              <MDBDropdownItem href="#">Another Action</MDBDropdownItem>
-              <MDBDropdownItem href="#">Something else here</MDBDropdownItem>
-            </MDBDropdownMenu>
-          </MDBDropdown>
-        </MDBNavbarItem>
-        <MDBNavbarItem to="#" disabled> Disabled </MDBNavbarItem>
       </MDBNavbarNav>
-      <!-- Search form -->
-      <!-- <form class="d-flex input-group w-auto">
-        <input
-          type="search"
-          class="form-control"
-          placeholder="Type query"
-          aria-label="Search"
-        />
-        <MDBBtn outline="primary"> Search </MDBBtn>
-      </form> -->
+
+      <div>
+        <MDBBtn color="dark" @click="signOut"> Log out</MDBBtn>
+      </div>
 
       <MDBBtn color="dark"> Sign up</MDBBtn>
       <MDBBtn outline="dark">Log in</MDBBtn>
@@ -87,6 +64,7 @@ import {
 import { ref } from "vue";
 
 import { cartItems } from "@/assets/product-details/products";
+import { getAuth, signOut } from "firebase/auth";
 
 export default {
   name: "NavbarComp",
@@ -115,6 +93,12 @@ export default {
       collapse1,
       dropdown1,
     };
+  },
+  methods: {
+    signOut() {
+      const auth = getAuth();
+      signOut(auth);
+    },
   },
 };
 </script>
