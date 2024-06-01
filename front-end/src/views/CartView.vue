@@ -120,6 +120,7 @@ export default {
           orderId: newOrderId,
           userId: this.user.uid,
           orderItems: this.cartItems,
+          totalPrice: Number(this.totalAmount),
           address: {},
           paymentDetails: {},
         };
