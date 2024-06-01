@@ -112,9 +112,16 @@ export default {
     },
     async proceedToPayment() {
       try {
+        const responseAll = await axios.get(`/api/orders`);
+        const allOrders = responseAll.data;
+        console.log("All fetched orders:", allOrders);
+      } catch (error) {
+        console.error("Failed to fetch all orders:", error);
+      }
+      try {
         const response = await axios.get(`/api/orders/last`);
         const lastOrder = response.data;
-        const newOrderId = (parseInt(lastOrder.orderId) + 1).toString();
+        const newOrderId = parseInt(lastOrder.orderId) + 1;
 
         const newOrder = {
           orderId: newOrderId,
@@ -133,7 +140,7 @@ export default {
         await axios.put(`/api/users/${this.user.uid}/purchasedOrders`, {
           orderId: newOrderId,
         });
-        this.$router.push("/payment");
+        //this.$router.push("/payment");
       } catch (error) {
         console.error("Failed to create new order:", error);
       }
