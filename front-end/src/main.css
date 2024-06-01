@@ -77,3 +77,9 @@
   background-color: black;
   height: 100px;
 }
+
+.form-width {
+  margin-top: 50px;
+  margin-bottom: 50px;
+  width: 600px;
+}

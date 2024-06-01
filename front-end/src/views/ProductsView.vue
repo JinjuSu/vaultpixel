@@ -25,7 +25,7 @@
           >
             <div class="card grid-wrap">
               <div class="image-card-product text-center">
-                <img class="image-product" :src="product.imageURL" />
+                <img class="image-product" :src="product.image" />
               </div>
               <div class="card-body">
                 <h5 class="card-title">{{ product.name }}</h5>
@@ -176,11 +176,11 @@ export default {
     },
   },
   async created() {
-    const response = await axios.get(`/api/products`);
-    const products = response.data; // responses with products from MongoDB
-    this.products = products; // Stores the products in this products.list
-    // console.log("Responded products: ", products);
-    // console.log("This producst: ", this.products);
+    // const response = await axios.get(`/api/products`);
+    // const products = response.data; // responses with products from MongoDB
+    // this.products = products; // Stores the products in this products.list
+    // // console.log("Responded products: ", products);
+    // // console.log("This producst: ", this.products);
   },
 };
 </script>

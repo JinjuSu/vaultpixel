@@ -1,13 +1,6 @@
 import { MongoClient } from "mongodb";
-import express from "express";
-import {
-  cartItems as cartItemsRaw,
-  products as productsRaw,
-} from "./products.js";
 import path from "path";
-
-let cartItems = cartItemsRaw;
-let products = productsRaw;
+import express from "express";
 
 // Connect MongoDB when the server is started
 async function start() {
@@ -18,8 +11,9 @@ async function start() {
   const db = client.db("vaultpixel-db");
 
   const app = express();
+
   app.use(express.json());
-  app.use("/images", express.static(path.join(__dirname, "../assets/wallets"))); // This should enable Express server to serve images for the front-end
+  app.use("/images", express.static(path.join(__dirname, "../assets/wallets"))); // Enable Express server to serve images for the front-end
 
   async function populatedCartIds(ids) {
     return Promise.all(
@@ -28,6 +22,68 @@ async function start() {
   }
 
   // ------ Read items in the database using app.get() call back
+
+  // Get all orders from orders table
+  app.get("/api/orders", async (req, res) => {
+    try {
+      const orders = await db.collection("orders").find({}).toArray();
+      console.log("Orders fetched from database:", orders);
+      res.send(orders);
+    } catch (error) {
+      console.error("Failed to fetch orders:", error);
+      res.status(500).send("Internal Server Error");
+    }
+  });
+
+  // Get the last order from orders table
+  app.get("/api/orders/last", async (req, res) => {
+    try {
+      const lastOrder = await db
+        .collection("orders")
+        .find({})
+        .sort({ orderId: -1 })
+        .limit(1)
+        .toArray();
+      res.send(lastOrder[0]);
+    } catch (error) {
+      console.error("Failed to fetch last order:", error);
+      res.status(500).send("Internal Server Error");
+    }
+  });
+
+  // Post a new order into orders table
+  app.post("/api/orders", async (req, res) => {
+    try {
+      const newOrder = req.body;
+      await db.collection("orders").insertOne(newOrder);
+      res.status(201).send("Order created");
+    } catch (error) {
+      console.error("Failed to create order:", error);
+      res.status(500).send("Internal Server Error");
+    }
+  });
+
+  // Update user's purchasedOrders list
+  app.put("/api/users/:userId/purchasedOrders", async (req, res) => {
+    try {
+      const userId = req.params.userId;
+      const { orderId } = req.body;
+
+      await db.collection("users").updateOne(
+        { id: userId },
+        {
+          $addToSet: { purchasedOrders: orderId }, // $addToSet prevents duplicates
+        }
+      );
+
+      res.status(200).send("Purchased orders updated");
+    } catch (error) {
+      console.error("Failed to update purchased orders:", error);
+      res.status(500).send("Internal Server Error");
+    }
+  });
+
+  // Get products from products table
   app.get("/api/products", async (req, res) => {
     const products = await db.collection("products").find({}).toArray();
     res.send(products);
