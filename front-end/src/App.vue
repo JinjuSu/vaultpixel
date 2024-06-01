@@ -1,13 +1,11 @@
 <template>
-  <Navbar></Navbar>
+  <Navbar :user="user"></Navbar>
 
-  <!-- Default code -->
-  <!-- Passing on `user` to other pages/components -->
+  <!-- Passing on `user` prop to other pages/components -->
   <router-view :user="user" />
 
   <div class="sitcky-bottom"><Footer></Footer></div>
 </template>
-<!-- Navbar script -->
 <script>
 import Navbar from "./components/NavbarComp.vue";
 import Footer from "./components/FooterComp.vue";

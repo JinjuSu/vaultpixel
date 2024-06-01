@@ -73,7 +73,7 @@ export default {
       cartItems: [],
     };
   },
-  props: ["user"], // accessed via App.vue
+  props: ["user"], // passed in from App.vue
   components: {
     NotFoundView,
   },
