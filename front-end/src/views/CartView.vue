@@ -67,13 +67,6 @@ export default {
   data() {
     return {
       cartItems: [],
-      orders: {
-        orderId: null, // make this the last fecthed order's id + 1 in string
-        id: "", // change this to this current "user" passed down from prop
-        orderItems: this.cartItems,
-        address: {},
-        paydetail: {},
-      },
     };
   },
   props: ["user"], // passed down from router-view, App.vue
@@ -116,18 +109,28 @@ export default {
       const updatedCart = response.data;
       this.cartItems = updatedCart;
     },
-    async fetchOrders() {
-      try {
-        const response = await axios.get(`/api/orders`);
-        this.orders = response.data;
-        console.log("Fetched orders: ", this.orders);
-      } catch (error) {
-        console.error("Failed to fetch orders:", error);
-      }
-    },
     async proceedToPayment() {
-      await this.fetchOrders(); // Fetch orders when the button is clicked
-      // this.$router.push("/payment");
+      try {
+        const response = await axios.get(`/api/orders/last`);
+        const lastOrder = response.data;
+        const newOrderId = (parseInt(lastOrder.orderId) + 1).toString();
+
+        const newOrder = {
+          orderId: newOrderId,
+          userId: this.user.uid,
+          orderItems: this.cartItems,
+          address: {},
+          paymentDetails: {},
+        };
+
+        console.log("Last Order: ", lastOrder);
+        console.log("New Order Id: ", newOrderId);
+        console.log("New Order: ", newOrder);
+        await axios.post(`/api/orders`, newOrder);
+        // this.$router.push("/payment");
+      } catch (error) {
+        console.error("Failed to create new order:", error);
+      }
     },
   },
   async created() {

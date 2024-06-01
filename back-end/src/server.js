@@ -29,7 +29,7 @@ async function start() {
 
   // ------ Read items in the database using app.get() call back
 
-  // Get orders from order table
+  // Get all orders from orders table
   app.get("/api/orders", async (req, res) => {
     try {
       const orders = await db.collection("orders").find({}).toArray();
@@ -37,6 +37,34 @@ async function start() {
       res.send(orders);
     } catch (error) {
       console.error("Failed to fetch orders:", error);
+      res.status(500).send("Internal Server Error");
+    }
+  });
+
+  // Get the last order from orders table
+  app.get("/api/orders/last", async (req, res) => {
+    try {
+      const lastOrder = await db
+        .collection("orders")
+        .find({})
+        .sort({ orderId: -1 })
+        .limit(1)
+        .toArray();
+      res.send(lastOrder[0]);
+    } catch (error) {
+      console.error("Failed to fetch last order:", error);
+      res.status(500).send("Internal Server Error");
+    }
+  });
+
+  // Post a new order into orders table
+  app.post("/api/orders", async (req, res) => {
+    try {
+      const newOrder = req.body;
+      await db.collection("orders").insertOne(newOrder);
+      res.status(201).send("Order created");
+    } catch (error) {
+      console.error("Failed to create order:", error);
       res.status(500).send("Internal Server Error");
     }
   });
