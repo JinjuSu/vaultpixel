@@ -16,6 +16,11 @@
       <MDBNavbarItem href="#">
         <router-link class="link-text" to="/about">About</router-link>
       </MDBNavbarItem>
+      <MDBNavbarItem href="#">
+        <router-link class="link-text" :to="'/purchasehistory'"
+          >Purchase history</router-link
+        >
+      </MDBNavbarItem>
     </MDBNavbarNav>
 
     <div>

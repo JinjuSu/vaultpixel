@@ -150,6 +150,27 @@ async function start() {
     }
   });
 
+  // PUT endpoint to update order's comment
+  app.put("/api/orders/:orderId/comment", async (req, res) => {
+    const orderId = parseInt(req.params.orderId);
+    const { comment } = req.body;
+
+    try {
+      const result = await db
+        .collection("orders")
+        .updateOne({ orderId: orderId }, { $set: { comment: comment } });
+
+      if (result.modifiedCount === 0) {
+        res.status(404).send("Order not found or no update needed.");
+      } else {
+        res.status(200).send("Comment updated successfully.");
+      }
+    } catch (error) {
+      console.error("Failed to update comment:", error);
+      res.status(500).send("Internal Server Error");
+    }
+  });
+
   // ------------------------ end of orders ------------------------
   // Get products from products table
   app.get("/api/products", async (req, res) => {

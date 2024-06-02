@@ -18,18 +18,28 @@
           <td>
             <div v-if="order.orderStatus === 'Pending'">
               <router-link :to="'/payment/' + order.orderId">
-                <a class="btn btn-sm btn-dark"> Pay </a></router-link
-              >
+                <button class="btn btn-sm btn-dark">Pay</button>
+              </router-link>
             </div>
             <div v-else>
               <button
                 class="btn btn-sm btn-dark"
-                @click="reviewOrder(order.orderId)"
+                @click="openReviewModal(order)"
               >
                 Review
               </button>
             </div>
           </td>
+          <!-- Modal for submitting reviews -->
+          <div v-if="currentOrder">
+            <textarea
+              v-model="reviewText"
+              placeholder="Type your review here..."
+            ></textarea>
+            <button @click="submitReview(currentOrder.orderId)">
+              Submit Review
+            </button>
+          </div>
         </tr>
       </tbody>
     </table>
@@ -44,20 +54,40 @@ export default {
   data() {
     return {
       orders: [],
+      currentOrder: null,
+      reviewText: "",
     };
   },
   props: ["user"],
-  async created() {
-    if (this.user && this.user.uid) {
-      try {
+  methods: {
+    async loadOrders() {
+      if (this.user && this.user.uid) {
         const response = await axios.get(`/api/orders/user/${this.user.uid}`);
         this.orders = response.data;
-      } catch (error) {
-        console.error("Failed to fetch purchase history:", error);
-        alert("Failed to fetch purchase history");
       }
-    }
+    },
+    openReviewModal(order) {
+      this.currentOrder = order;
+      this.reviewText = order.comment || "";
+    },
+    async submitReview(orderId) {
+      try {
+        const response = await axios.put(`/api/orders/${orderId}/comment`, {
+          comment: this.reviewText,
+        });
+        if (response.status === 200) {
+          alert("Review updated!");
+          this.currentOrder.comment = this.reviewText;
+          this.currentOrder = null;
+        }
+      } catch (error) {
+        console.error("Failed to submit review:", error);
+        alert("Failed to update review.");
+      }
+    },
   },
-  methods: {},
+  created() {
+    this.loadOrders();
+  },
 };
 </script>

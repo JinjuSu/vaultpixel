@@ -244,6 +244,17 @@ export default {
     // console.log("Order Details:", this.order, typeof this.order); // return the object
   },
   methods: {
+    async fetchOrder() {
+      try {
+        const response = await axios.get(
+          `/api/payment/${this.$route.params.orderId}`
+        );
+        this.order = response.data;
+      } catch (error) {
+        console.error("Failed to fetch order details:", error);
+        alert("Failed to load order details.");
+      }
+    },
     async submitPayment() {
       const orderId = this.$route.params.orderId;
       const orderUpdate = {
@@ -251,8 +262,19 @@ export default {
         paymentDetails: this.paymentDetails,
         orderStatus: "Completed",
       };
-      await axios.put(`/api/orders/${orderId}/update`, orderUpdate);
-      alert("Payment confirmed!");
+      try {
+        const response = await axios.put(
+          `/api/orders/${orderId}/update`,
+          orderUpdate
+        );
+        if (response.status === 200) {
+          alert("Payment confirmed!");
+          await this.fetchOrder(); // Re-fetch the order to update the UI with new status
+        }
+      } catch (error) {
+        console.error("Failed to submit payment:", error);
+        alert("Payment submission failed.");
+      }
     },
   },
 };
