@@ -171,6 +171,23 @@ async function start() {
     }
   });
 
+  // Get all commented orders
+  app.get("/api/orders/commented", async (req, res) => {
+    try {
+      const ordersWithComments = await db
+        .collection("orders")
+        .find({ comment: { $nin: ["", null] } }) // This query selects orders where comment is neither "" nor null
+        .toArray();
+      if (ordersWithComments.length === 0) {
+        res.status(404).send("No commented orders found.");
+      } else {
+        res.json(ordersWithComments);
+      }
+    } catch (error) {
+      console.error("Failed to fetch commented orders:", error);
+      res.status(500).send("Internal Server Error");
+    }
+  });
   // ------------------------ end of orders ------------------------
   // Get products from products table
   app.get("/api/products", async (req, res) => {
