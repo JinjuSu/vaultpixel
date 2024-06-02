@@ -5,7 +5,7 @@ import AboutView from "../views/AboutView.vue";
 import ProductsView from "../views/ProductsView.vue";
 import ProductDetailsView from "../views/ProductDetailsView.vue";
 import CartView from "../views/CartView.vue";
-import PaymentView from "../views/Payment.vue";
+import PaymentView from "../views/PaymentView.vue";
 
 const routes = [
   {
@@ -39,9 +39,10 @@ const routes = [
     component: CartView,
   },
   {
-    path: "/payment",
+    path: "/payment/:orderId",
     name: "payment",
     component: PaymentView,
+    props: true,
   },
 ];
 

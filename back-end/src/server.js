@@ -87,6 +87,7 @@ async function start() {
     }
   });
 
+  // ------ end of orders ------
   // Get products from products table
   app.get("/api/products", async (req, res) => {
     const products = await db.collection("products").find({}).toArray();
@@ -103,8 +104,24 @@ async function start() {
 
   app.get("/api/product/:productId", async (req, res) => {
     const productId = req.params.productId;
+    console.log("productId :", typeof productId, productId);
     const product = await db.collection("products").findOne({ id: productId });
     res.json(product);
+  });
+  // Get a specific order by orderId
+  app.get("/api/payment/:orderId", async (req, res) => {
+    try {
+      const orderId = parseInt(req.params.orderId); // Convert orderId to integer if stored as integer in MongoDB
+      const order = await db.collection("orders").findOne({ orderId });
+      if (!order) {
+        res.status(404).send("Order not found");
+      } else {
+        res.json(order);
+      }
+    } catch (error) {
+      console.error("Failed to fetch order:", error);
+      res.status(500).send("Internal Server Error");
+    }
   });
 
   // ------ Add item to cart w/ POST callback function
