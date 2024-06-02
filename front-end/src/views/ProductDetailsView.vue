@@ -57,12 +57,7 @@
 <script>
 import NotFoundView from "./NotFoundView.vue";
 import axios from "axios";
-import {
-  getAuth,
-  sendSignInLinkToEmail,
-  signInWithEmailLink,
-  isSignInWithEmailLink,
-} from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 export default {
   name: "ProductDetailsView",
@@ -112,30 +107,29 @@ export default {
     },
     async signIn() {
       const email = prompt("Please enter your email to sign in");
+      const password = prompt("Please enter your password");
       const auth = getAuth();
-      const actionCodeSettings = {
-        url: `https://fj16bq7r-8080.aue.devtunnels.ms/product/${this.$route.params.id}`,
-        handleCodeInApp: true,
-      };
-      await sendSignInLinkToEmail(auth, email, actionCodeSettings);
-      alert("A login link was sent to the email you provided");
-      window.localStorage.setItem("emailForSignIn", email);
+
+      try {
+        const userCredential = await signInWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+        alert("Successfully signed in");
+        console.log("User Details:", userCredential);
+      } catch (error) {
+        alert(`Login failed: ${error.message}`);
+        console.error("Login error:", error);
+      }
     },
   },
   async created() {
-    const auth = getAuth();
-    if (isSignInWithEmailLink(auth, window.location.href)) {
-      const email = window.localStorage.getItem("emailForSignIn");
-      await signInWithEmailLink(auth, email, window.location.href);
-      alert("Successfully signed in");
-      window.localStorage.removeItem("emailForSignIn");
-    }
-
     const response = await axios.get(`/api/product/${this.$route.params.id}`);
     const product = response.data;
     this.product = product;
-    console.log("Product ID:", response);
-    console.log("Product Details:", this.product);
+    console.log("Product ID:", response, typeof response); // return the whole product object
+    console.log("Product Details:", this.product, typeof this.product); // return
 
     if (this.user) {
       console.log("this user: ", this.user);

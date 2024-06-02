@@ -128,6 +128,7 @@ export default {
           userId: this.user.uid,
           orderItems: this.cartItems,
           totalPrice: Number(this.totalAmount),
+          orderStatus: "Pending",
           address: {},
           paymentDetails: {},
         };
@@ -140,7 +141,9 @@ export default {
         await axios.put(`/api/users/${this.user.uid}/purchasedOrders`, {
           orderId: newOrderId,
         });
-        this.$router.push("/payment");
+        this.$router.push({
+          path: `/payment/${newOrderId}`,
+        });
       } catch (error) {
         console.error("Failed to create new order:", error);
       }
