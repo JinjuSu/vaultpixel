@@ -15,6 +15,13 @@ async function start() {
   app.use(express.json());
   app.use("/images", express.static(path.join(__dirname, "../assets/wallets"))); // Enable Express server to serve images for the front-end
 
+  app.use(
+    express.static(path.resolve(__dirname, "../dist"), {
+      maxAge: "1y",
+      etag: false,
+    })
+  );
+
   async function populatedCartIds(ids) {
     return Promise.all(
       ids.map((id) => db.collection("products").findOne({ id })) // Equivalent to using map() in API calling level
@@ -251,8 +258,14 @@ async function start() {
     res.json(populatedCart);
   });
 
-  app.listen(8000, () => {
-    console.log("Server is listening on port 8000");
+  // -------------------- Deployment starts here --------------------
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "../dist/index.html"));
+  });
+
+  const port = process.env.PORT || 8000;
+  app.listen(port, () => {
+    console.log("Server is listening on port" + port);
   });
 }
 
