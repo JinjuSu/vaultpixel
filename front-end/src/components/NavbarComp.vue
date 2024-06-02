@@ -5,44 +5,49 @@
         >VaultPixel</router-link
       ></MDBNavbarBrand
     >
+    <MDBNavbarToggler
+      @click="collapse1 = !collapse1"
+      target="#navbarSupportedContent"
+    ></MDBNavbarToggler>
+    <MDBCollapse v-model="collapse1" id="navbarSupportedContent">
+      <MDBNavbarNav class="mb-2 mb-lg-0">
+        <MDBNavbarItem to="#" active>
+          <router-link class="link-text" to="/">Home</router-link>
+        </MDBNavbarItem>
+        <MDBNavbarItem href="#">
+          <router-link class="link-text" to="/products">Products</router-link>
+        </MDBNavbarItem>
+        <MDBNavbarItem href="#" v-if="user">
+          <router-link class="link-text" :to="'/purchasehistory'"
+            >Purchase history</router-link
+          >
+        </MDBNavbarItem>
+      </MDBNavbarNav>
 
-    <MDBNavbarNav class="mb-2 mb-lg-0">
-      <MDBNavbarItem to="#" active>
-        <router-link class="link-text" to="/">Home</router-link>
-      </MDBNavbarItem>
-      <MDBNavbarItem href="#">
-        <router-link class="link-text" to="/products">Products</router-link>
-      </MDBNavbarItem>
-      <MDBNavbarItem href="#" v-if="user">
-        <router-link class="link-text" :to="'/purchasehistory'"
-          >Purchase history</router-link
-        >
-      </MDBNavbarItem>
-    </MDBNavbarNav>
+      <div>
+        <MDBBtn outline="light" @click="signOut" v-if="user"> Log out</MDBBtn>
+      </div>
 
-    <div>
-      <MDBBtn outline="light" @click="signOut" v-if="user"> Log out</MDBBtn>
-    </div>
+      <div v-if="!user">
+        <MDBBtn color="light" @click="signUp"> Sign up</MDBBtn>
+        <MDBBtn outline="light" @click="signIn">Log in</MDBBtn>
+      </div>
+      <!-- Cart icon logic -->
 
-    <div v-if="!user">
-      <MDBBtn color="light" @click="signUp"> Sign up</MDBBtn>
-      <MDBBtn outline="light" @click="signIn">Log in</MDBBtn>
-    </div>
-    <!-- Cart icon logic -->
+      <MDBBtn v-if="cartItems.length > 0" color="light"
+        ><router-link to="/cart"
+          ><img
+            class="image-icon-cart"
+            src="../assets/icons/cart-item-icon.png" /></router-link
+      ></MDBBtn>
 
-    <MDBBtn v-if="cartItems.length > 0" color="light"
-      ><router-link to="/cart"
-        ><img
-          class="image-icon-cart"
-          src="../assets/icons/cart-item-icon.png" /></router-link
-    ></MDBBtn>
-
-    <MDBBtn v-else-if="cartItems.length === 0" color="light"
-      ><router-link to="/cart"
-        ><img
-          class="image-icon-cart"
-          src="../assets/icons/cart-icon.png" /></router-link
-    ></MDBBtn>
+      <MDBBtn v-else-if="cartItems.length === 0" color="light"
+        ><router-link to="/cart"
+          ><img
+            class="image-icon-cart"
+            src="../assets/icons/cart-icon.png" /></router-link
+      ></MDBBtn>
+    </MDBCollapse>
   </MDBNavbar>
 </template>
 <!-- Navbar script -->
