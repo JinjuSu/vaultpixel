@@ -30,19 +30,24 @@
               </button>
             </div>
           </td>
-          <!-- Modal for submitting reviews -->
-          <div v-if="currentOrder">
-            <textarea
-              v-model="reviewText"
-              placeholder="Type your review here..."
-            ></textarea>
-            <button @click="submitReview(currentOrder.orderId)">
-              Submit Review
-            </button>
-          </div>
         </tr>
       </tbody>
     </table>
+    <!-- Modal for submitting reviews -->
+    <div v-if="displayModal" class="modal">
+      <div class="modal-content">
+        <h4>Submit a Review for Order #{{ currentOrder.orderId }}</h4>
+        <textarea
+          v-model="reviewText"
+          placeholder="Type your review here..."
+          rows="4"
+        ></textarea>
+        <div>
+          <button @click="submitReview">Submit Review</button>
+          <button @click="closeModal">Close</button>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -56,6 +61,7 @@ export default {
       orders: [],
       currentOrder: null,
       reviewText: "",
+      displayModal: false,
     };
   },
   props: ["user"],
@@ -68,22 +74,23 @@ export default {
     },
     openReviewModal(order) {
       this.currentOrder = order;
-      this.reviewText = order.comment || "";
+      this.reviewText = "";
+      this.displayModal = true;
     },
     async submitReview(orderId) {
       try {
-        const response = await axios.put(`/api/orders/${orderId}/comment`, {
+        await axios.put(`/api/orders/${this.currentOrder.orderId}/comment`, {
           comment: this.reviewText,
         });
-        if (response.status === 200) {
-          alert("Review updated!");
-          this.currentOrder.comment = this.reviewText;
-          this.currentOrder = null;
-        }
+        alert("Review submitted successfully!");
+        this.closeModal();
       } catch (error) {
-        console.error("Failed to submit review:", error);
-        alert("Failed to update review.");
+        console.error("Error submitting review:", error);
+        alert("Failed to submit review.");
       }
+    },
+    closeModal() {
+      this.displayModal = false;
     },
   },
   created() {
@@ -91,3 +98,26 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 50%;
+  min-width: 300px;
+}
+</style>
