@@ -128,6 +128,7 @@ export default {
           userId: this.user.uid,
           orderItems: this.cartItems,
           totalPrice: Number(this.totalAmount),
+          orderStatus: "Pending",
           address: {},
           paymentDetails: {},
         };

@@ -1,29 +1,32 @@
 <template>
   <div class="row my-5 justify-content-center">
     <div class="col-sm-6 col-8">
-      <div v-if="user">
+      <div v-if="user && order.orderStatus == 'Pending'">
         <h1>Order No# {{ order.orderId }}</h1>
+        <h3>Status: {{ order.orderStatus }}</h3>
         <form class="needs-validation" @submit.prevent="submitForm">
           <!-- Shipping address form -->
           <h2>Shipping address</h2>
           <div class="row my-3 justify-content-between">
             <div class="row">
               <div class="col-sm-6 col-12">
-                <label for="firstname" class="form-label">First name</label>
+                <label for="firstName" class="form-label">First name</label>
                 <input
                   type="text"
                   placeholder="John"
                   class="form-control"
                   required
+                  v-model="address.firstName"
                 />
               </div>
               <div class="col-sm-6 col-12">
-                <label for="lastname" class="form-label">Last name</label>
+                <label for="lastName" class="form-label">Last name</label>
                 <input
                   type="text"
                   placeholder="Doe"
                   class="form-control"
                   required
+                  v-model="address.lastName"
                 />
               </div>
             </div>
@@ -36,6 +39,7 @@
                   placeholder="Glenferrie"
                   class="form-control"
                   required
+                  v-model="address.street"
                 />
               </div>
             </div>
@@ -48,6 +52,7 @@
                   placeholder="Hawthorn"
                   class="form-control"
                   required
+                  v-model="address.suburb"
                 />
               </div>
               <!-- state -->
@@ -58,6 +63,7 @@
                   placeholder="Victoria"
                   class="form-control"
                   required
+                  v-model="address.state"
                 />
               </div>
             </div>
@@ -65,12 +71,13 @@
             <div class="row justify-content-between">
               <!-- zip code -->
               <div class="col-sm-6 col-12">
-                <label for="postcode" class="form-label">Post code</label>
+                <label for="post" class="form-label">Post code</label>
                 <input
                   type="text"
                   placeholder="00000"
                   class="form-control"
                   required
+                  v-model="address.post"
                 />
               </div>
               <!-- country -->
@@ -81,6 +88,7 @@
                   placeholder="Australia"
                   class="form-control"
                   required
+                  v-model="address.country"
                 />
               </div>
             </div>
@@ -92,24 +100,26 @@
           <div class="row">
             <h2>Payment details</h2>
             <div>
-              <label for="card-name" class="form-label">Card name</label>
+              <label for="cardname" class="form-label">Card name</label>
               <input
                 type="text"
                 placeholder="John Doe"
                 class="form-control"
                 required
+                v-model="paymentDetails.cardName"
               />
             </div>
           </div>
           <div class="row">
             <div class="col mt-3">
-              <label for="card-number" class="form-label">Card number</label>
+              <label for="cardnumber" class="form-label">Card number</label>
               <input
                 type="text"
                 placeholder="4123 4567 8900 5432"
                 maxlength="16"
                 class="form-control"
                 required
+                v-model="paymentDetails.cardNumber"
               />
             </div>
             <div class="col-auto text-end mt-5">
@@ -120,9 +130,12 @@
           <div class="row justify-content-between my-3">
             <div class="col-auto">
               <label for="expiration-date">Expiration date </label>
-
               <p>
-                <input type="date" required />
+                <input
+                  type="date"
+                  required
+                  v-model="paymentDetails.expiryDate"
+                />
               </p>
             </div>
             <div class="col-sm-6 col-12">
@@ -134,6 +147,7 @@
                 minlength="3"
                 maxlength="3"
                 required
+                v-model="paymentDetails.cvv"
               />
             </div>
           </div>
@@ -155,7 +169,14 @@
             </div>
           </div>
           <p>
-            <button>Confirm payment: $AU</button>
+            <a
+              href="#!"
+              class="btn btn-sm btn-dark button-shop"
+              data-mdb-ripple-init
+              @click="submitPayment"
+            >
+              Confirm payment: $AU {{ order.totalPrice }}
+            </a>
           </p>
         </form>
       </div>
@@ -170,12 +191,12 @@
               <p>Your order is now being prepared.</p>
             </div>
             <div class="my-4">
-              <router-link :to="'/home'"
+              <router-link :to="'/purchasehistory'"
                 ><a
                   href="#!"
                   class="btn btn-sm btn-dark button-shop"
                   data-mdb-ripple-init
-                  >Go to home
+                  >Go purchase history
                 </a></router-link
               >
             </div>
@@ -187,14 +208,6 @@
 </template>
 
 <script>
-import {
-  MDBContainer,
-  MDBCol,
-  MDBRow,
-  MDBIcon,
-  MDBBtn,
-  mdbRipple,
-} from "mdb-vue-ui-kit";
 import axios from "axios";
 
 export default {
@@ -203,6 +216,22 @@ export default {
   data() {
     return {
       order: {},
+      address: {
+        firstName: "",
+        lastName: "",
+        street: "",
+        suburb: "",
+        state: "",
+        post: "",
+        country: "",
+      },
+      paymentDetails: {
+        cardName: "",
+        cardNumber: "",
+        cardType: "",
+        expiryDate: "",
+        cvv: "",
+      },
     };
   },
   async created() {
@@ -211,9 +240,20 @@ export default {
     );
     const order = response.data;
     this.order = order;
-    console.log("Order ID:", response, typeof response); // return the whole product object
-    console.log("Order Details:", this.order, typeof this.order); // return
+    // console.log("Order ID:", response, typeof response); // return the  object
+    // console.log("Order Details:", this.order, typeof this.order); // return the object
   },
-  methods: {},
+  methods: {
+    async submitPayment() {
+      const orderId = this.$route.params.orderId;
+      const orderUpdate = {
+        address: this.address,
+        paymentDetails: this.paymentDetails,
+        orderStatus: "Completed",
+      };
+      await axios.put(`/api/orders/${orderId}/update`, orderUpdate);
+      alert("Payment confirmed!");
+    },
+  },
 };
 </script>
