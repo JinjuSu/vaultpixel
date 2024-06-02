@@ -1,5 +1,5 @@
 <template>
-  <MDBNavbar expand="lg" light bg="light" container>
+  <MDBNavbar expand="lg" dark bg="dark" container>
     <MDBNavbarBrand href="#" class="fw-bold"
       ><router-link class="link-text" to="/products"
         >VaultPixel</router-link
@@ -13,10 +13,7 @@
       <MDBNavbarItem href="#">
         <router-link class="link-text" to="/products">Products</router-link>
       </MDBNavbarItem>
-      <MDBNavbarItem href="#">
-        <router-link class="link-text" to="/about">About</router-link>
-      </MDBNavbarItem>
-      <MDBNavbarItem href="#">
+      <MDBNavbarItem href="#" v-if="user">
         <router-link class="link-text" :to="'/purchasehistory'"
           >Purchase history</router-link
         >
@@ -24,12 +21,12 @@
     </MDBNavbarNav>
 
     <div>
-      <MDBBtn color="dark" @click="signOut" v-if="user"> Log out</MDBBtn>
+      <MDBBtn outline="light" @click="signOut" v-if="user"> Log out</MDBBtn>
     </div>
 
     <div v-if="!user">
-      <MDBBtn color="dark" @click="signUp"> Sign up</MDBBtn>
-      <MDBBtn outline="dark" @click="signIn">Log in</MDBBtn>
+      <MDBBtn color="light" @click="signUp"> Sign up</MDBBtn>
+      <MDBBtn outline="light" @click="signIn">Log in</MDBBtn>
     </div>
     <!-- Cart icon logic -->
 
