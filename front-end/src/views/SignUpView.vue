@@ -206,3 +206,13 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+#cardnum {
+  position: relative;
+}
+#cvv {
+  bottom: 0;
+  padding-bottom: 0;
+}
+</style>
