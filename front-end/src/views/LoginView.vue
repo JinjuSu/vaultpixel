@@ -2,20 +2,8 @@
   <div class="container p-5">
     <div class="row justify-content-center">
       <div class="col-lg-4 col-md-6 col-sm-8">
-        <h1 class="my-3">Sign up</h1>
+        <h1 class="my-3">Log in</h1>
 
-        <div class="row">
-          <label for="username">Username</label>
-          <input
-            class="form-control"
-            type="text"
-            maxlength="8"
-            v-model.trim="username"
-            @input="checkUsername"
-            ref="usernameInput"
-          />
-          <p v-if="errorMsg.username">{{ errorMsg.username }}</p>
-        </div>
         <div class="row">
           <label for="email">Email</label>
           <input
@@ -41,31 +29,16 @@
             {{ errorMsg.password }}
           </p>
         </div>
-        <div class="row">
-          <label for="confirmPassword">Confirm password</label>
-          <input
-            class="form-control"
-            type="password"
-            minlength="6"
-            v-model.trim="confirmPassword"
-            @input="checkCPassword"
-            ref="confirmPasswordInput"
-          />
-          <p v-if="errorMsg.confirmPassword" class="text-danger">
-            {{ errorMsg.confirmPassword }}
-          </p>
-        </div>
+
         <div class="my-4">
-          <!-- <router-link to="/login"> -->
           <MDBBtn
             color="dark"
             v-bind:disabled="!formIsFilled"
             :class="['btn', submitButtonColor]"
-            @click="signUp"
+            @click="signIn"
           >
-            Sign up
-          </MDBBtn>
-          <!-- </router-link> -->
+            Log in</MDBBtn
+          >
         </div>
       </div>
     </div>
@@ -76,19 +49,16 @@
 import { MDBBtn } from "mdb-vue-ui-kit";
 import {
   getAuth,
-  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
   onAuthStateChanged,
 } from "firebase/auth";
-import axios from "axios";
 
 export default {
-  name: "SignUpView",
+  name: "LogInView",
   data() {
     return {
-      username: "",
       email: "",
       password: "",
-      confirmPassword: "",
       errorMsg: [],
       canSubmit: false,
     };
@@ -99,9 +69,7 @@ export default {
   },
   computed: {
     formIsFilled: function () {
-      return (
-        this.username && this.email && this.password && this.confirmPassword
-      );
+      return this.email && this.password;
     },
     submitButtonColor: function () {
       this.checkSubmit();
@@ -113,15 +81,6 @@ export default {
     },
   },
   methods: {
-    checkUsername: function () {
-      const input = this.$refs.usernameInput;
-
-      if (!input.checkValidity()) {
-        this.errorMsg.username = input.validationMessage;
-      } else {
-        this.errorMsg.username = null;
-      }
-    },
     checkEmail: function () {
       const input = this.$refs.emailInput;
       if (!input.checkValidity()) {
@@ -143,14 +102,7 @@ export default {
         this.errorMsg.password = null;
       }
     },
-    checkCPassword: function () {
-      if (this.confirmPassword !== this.password) {
-        // Checks for at least one special character
-        this.errorMsg.confirmPassword = "Passwords do not match";
-      } else {
-        this.errorMsg.confirmPassword = null;
-      }
-    },
+
     checkSubmit: function () {
       // reset this.canSubmit
       this.canSubmit = true;
@@ -164,35 +116,22 @@ export default {
         }
       }
     },
-    async signUp() {
-      if (!this.canSubmit) {
-        return;
-      }
+    async signIn() {
+      //   const email = prompt("Please enter your email to sign in");
+      //   const password = prompt("Please enter your password");
       const auth = getAuth();
+
       try {
-        const userCredential = await createUserWithEmailAndPassword(
+        const userCredential = await signInWithEmailAndPassword(
           auth,
           this.email,
           this.password
         );
-        const user = userCredential.user;
-
-        // Add user to MongoDB
-        const response = await axios.post("/api/users", {
-          uid: user.uid, // UID from Firebase
-          username: this.username, // Username entered by the user
-        });
-        if (response.status === 201) {
-          alert("Account created successfully!");
-          this.$router.push("/login");
-        } else {
-          alert(`Failed to add user to database: ${response.data}`);
-        }
-
-        console.log(userCredential);
+        alert("Successfully signed in");
+        console.log("User Details:", userCredential);
       } catch (error) {
-        alert(`Failed to create account: ${error.message}`);
-        console.error("Signup error:", error);
+        alert(`Login failed: ${error.message}`);
+        console.error("Login error:", error);
       }
     },
   },

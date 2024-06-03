@@ -28,7 +28,34 @@ async function start() {
     );
   }
 
-  // ------ Read items in the database using app.get() call back
+  // ------------ users starts here ------------//
+  app.post("/api/users", async (req, res) => {
+    const { uid, username } = req.body;
+    const users = db.collection("users");
+
+    try {
+      // Check if user already exists
+      const existingUser = await users.findOne({ id: uid });
+      if (existingUser) {
+        res.status(409).send("User already exists");
+        return;
+      }
+
+      // Insert new user if not exists
+      await users.insertOne({
+        id: uid,
+        username: username,
+        createdAt: new Date(),
+      });
+
+      res.status(201).send("User added successfully");
+    } catch (error) {
+      console.error("Failed to insert user:", error);
+      res.status(500).send("Internal Server Error");
+    }
+  });
+
+  // ------------ uers ends here ------------//
 
   // Get all orders from orders table
   app.get("/api/orders", async (req, res) => {
@@ -147,13 +174,14 @@ async function start() {
         .find({ userId: userId })
         .toArray();
       if (orders.length === 0) {
-        res.status(404).send("No orders found for this user.");
+        // Instead of sending a 404 error, return an empty array with a 200 status
+        res.status(200).json([]);
       } else {
         res.status(200).json(orders);
       }
     } catch (error) {
       console.error("Failed to fetch orders for user:", error);
-      res.status(500).send("Internal Server Error");
+      res.status(500).send("Internal Server Stor Error");
     }
   });
 
@@ -265,7 +293,7 @@ async function start() {
 
   const port = process.env.PORT || 8000;
   app.listen(port, () => {
-    console.log("Server is listening on port" + port);
+    console.log("Server is listening on port " + port);
   });
 }
 

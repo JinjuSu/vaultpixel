@@ -1,7 +1,12 @@
 <template>
   <div class="container my-5 px-5">
     <h1 class="text-center mb-4">Purchase History</h1>
-    <table class="table">
+    <!-- Condition to check if orders array is empty -->
+    <div v-if="orders.length === 0" class="text-center">
+      <p>You have no purchased orders.</p>
+    </div>
+    <!-- Only display the table if there are orders -->
+    <table class="table" v-else>
       <thead>
         <tr>
           <th>Order No#</th>
@@ -68,8 +73,13 @@ export default {
   methods: {
     async loadOrders() {
       if (this.user && this.user.uid) {
-        const response = await axios.get(`/api/orders/user/${this.user.uid}`);
-        this.orders = response.data;
+        try {
+          const response = await axios.get(`/api/orders/user/${this.user.uid}`);
+          this.orders = response.data; // This will be an empty array if no orders are found
+        } catch (error) {
+          console.error("Error fetching orders:", error);
+          alert("Failed to load purchase history.");
+        }
       }
     },
     openReviewModal(order) {

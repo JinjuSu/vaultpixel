@@ -29,8 +29,12 @@
       </div>
 
       <div v-if="!user">
-        <MDBBtn color="light" @click="signUp"> Sign up</MDBBtn>
-        <MDBBtn outline="light" @click="signIn">Log in</MDBBtn>
+        <router-link to="/signup">
+          <MDBBtn color="light"> Sign up</MDBBtn>
+        </router-link>
+        <router-link to="/login">
+          <MDBBtn outline="light">Log in</MDBBtn>
+        </router-link>
       </div>
       <!-- Cart icon logic -->
 
