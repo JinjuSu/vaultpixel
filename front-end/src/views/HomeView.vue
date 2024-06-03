@@ -16,9 +16,11 @@
           </div>
           <div class="row">
             <div class="">
-              <button class="btn btn-sm btn-dark p-3 fw-bold fs-5">
-                Get started
-              </button>
+              <router-link to="/products">
+                <button class="btn btn-sm btn-dark p-3 fw-bold fs-5">
+                  Get started
+                </button>
+              </router-link>
             </div>
           </div>
         </div>

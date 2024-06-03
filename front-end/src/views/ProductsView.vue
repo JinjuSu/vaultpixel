@@ -2,17 +2,18 @@
   <div class="container my-5">
     <!-- Search bar section -->
 
-    <MDBInput
-      class="mb-4"
-      v-model="searchProduct"
-      placeholder="Search"
-      type="search"
-    />
     <!-- Product section -->
     <div class="row mb-4">
       <div class="col-3">
+        <h3>Find your safest vault</h3>
+        <MDBInput
+          class="mb-4"
+          v-model="searchProduct"
+          placeholder="Search"
+          type="search"
+        />
         <!-- Filter column -->
-        <FilterComp></FilterComp>
+        <!-- <FilterComp></FilterComp> -->
       </div>
 
       <!-- Product column 3 cards per row -->

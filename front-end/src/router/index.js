@@ -8,6 +8,8 @@ import CartView from "../views/CartView.vue";
 import PaymentView from "../views/PaymentView.vue";
 import PurchaseHistoryView from "../views/PurchaseHistoryView.vue";
 import PurchasedOrderView from "../views/PurchasedOrderView.vue";
+import SignUpView from "@/views/SignUpView.vue";
+import LoginView from "@/views/LoginView.vue";
 
 const routes = [
   {
@@ -56,6 +58,18 @@ const routes = [
     path: "/purchasedorder/:orderId",
     name: "purchasedorder",
     component: PurchasedOrderView,
+    props: true,
+  },
+  {
+    path: "/signup",
+    name: "signup",
+    component: SignUpView,
+    props: true,
+  },
+  {
+    path: "/login",
+    name: "login",
+    component: LoginView,
     props: true,
   },
 ];
