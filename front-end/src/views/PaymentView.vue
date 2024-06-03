@@ -4,136 +4,136 @@
       <div v-if="user && order.orderStatus == 'Pending'">
         <h1>Order No# {{ order.orderId }}</h1>
         <p><strong>Status: </strong>{{ order.orderStatus }}</p>
-        <form class="needs-validation" @submit.prevent="submitForm">
-          <!-- Shipping address form -->
-          <h2>Shipping address</h2>
-          <div class="row my-3 justify-content-between">
-            <div class="row">
-              <div class="col-sm-6 col-12">
-                <label for="firstName" class="form-label">First name</label>
-                <input
-                  type="text"
-                  placeholder="John"
-                  class="form-control"
-                  required
-                  v-model="address.firstName"
-                  @input="checkFirstName"
-                  ref="firstNameInput"
-                />
-                <div v-if="errorMsg.firstName" class="text-danger">
-                  {{ errorMsg.firstName }}
-                </div>
-              </div>
-              <div class="col-sm-6 col-12">
-                <label for="lastName" class="form-label">Last name</label>
-                <input
-                  type="text"
-                  placeholder="Doe"
-                  class="form-control"
-                  required
-                  v-model="address.lastName"
-                  @input="checkLastName"
-                  ref="lastNameInput"
-                />
-                <div v-if="errorMsg.lastName" class="text-danger">
-                  {{ errorMsg.lastName }}
-                </div>
+        <!-- Shipping address form -->
+        <h2>Shipping address</h2>
+        <div class="row my-3 justify-content-between">
+          <div class="row">
+            <div class="col-sm-6 col-12">
+              <label for="firstName" class="form-label">First name</label>
+              <input
+                type="text"
+                placeholder="John"
+                class="form-control"
+                required
+                v-model="address.firstName"
+                @input="checkFirstName"
+                ref="firstNameInput"
+              />
+              <div v-if="errorMsg.firstName" class="text-danger">
+                {{ errorMsg.firstName }}
               </div>
             </div>
-            <div class="row">
-              <!-- address -->
-              <div class="">
-                <label for="street" class="form-label">Street address</label>
-                <input
-                  type="text"
-                  placeholder="Glenferrie"
-                  class="form-control"
-                  required
-                  v-model="address.street"
-                  @input="checkStreet"
-                  ref="streetInput"
-                />
-                <div v-if="errorMsg.street" class="text-danger">
-                  {{ errorMsg.street }}
-                </div>
-              </div>
-            </div>
-            <div class="row justify-content-between">
-              <!-- suburb -->
-              <div class="col-sm-6 col-12">
-                <label for="suburb" class="form-label">Suburb</label>
-                <input
-                  type="text"
-                  placeholder="Hawthorn"
-                  class="form-control"
-                  required
-                  v-model="address.suburb"
-                  @input="checkSuburb"
-                  ref="suburbInput"
-                />
-                <div v-if="errorMsg.suburb" class="text-danger">
-                  {{ errorMsg.suburb }}
-                </div>
-              </div>
-              <!-- state -->
-              <div class="col-sm-6 col-12">
-                <label for="state" class="form-label">State</label>
-                <input
-                  type="text"
-                  placeholder="Victoria"
-                  class="form-control"
-                  required
-                  v-model="address.state"
-                  @input="checkState"
-                  ref="stateInput"
-                />
-                <div v-if="errorMsg.state" class="text-danger">
-                  {{ errorMsg.state }}
-                </div>
-              </div>
-            </div>
-            <div class="row justify-content-between">
-              <!-- zip code -->
-              <div class="col-sm-6 col-12">
-                <label for="post" class="form-label">Post code</label>
-                <input
-                  type="text"
-                  placeholder="00000"
-                  maxlength="5"
-                  class="form-control"
-                  required
-                  v-model="address.post"
-                  @input="checkPost"
-                  ref="postInput"
-                />
-                <div v-if="errorMsg.post" class="text-danger">
-                  {{ errorMsg.post }}
-                </div>
-              </div>
-              <!-- country -->
-              <div class="col-sm-6 col-12">
-                <label for="country" class="form-label">Country</label>
-                <input
-                  type="text"
-                  placeholder="Australia"
-                  class="form-control"
-                  required
-                  v-model="address.country"
-                  @input="checkCountry"
-                  ref="countryInput"
-                />
-                <div v-if="errorMsg.country" class="text-danger">
-                  {{ errorMsg.country }}
-                </div>
+            <div class="col-sm-6 col-12">
+              <label for="lastName" class="form-label">Last name</label>
+              <input
+                type="text"
+                placeholder="Doe"
+                class="form-control"
+                required
+                v-model="address.lastName"
+                @input="checkLastName"
+                ref="lastNameInput"
+              />
+              <div v-if="errorMsg.lastName" class="text-danger">
+                {{ errorMsg.lastName }}
               </div>
             </div>
           </div>
-          <!-- End of Shipping address form -->
+          <div class="row">
+            <!-- address -->
+            <div class="">
+              <label for="street" class="form-label">Street address</label>
+              <input
+                type="text"
+                placeholder="Glenferrie"
+                class="form-control"
+                required
+                v-model="address.street"
+                @input="checkStreet"
+                ref="streetInput"
+              />
+              <div v-if="errorMsg.street" class="text-danger">
+                {{ errorMsg.street }}
+              </div>
+            </div>
+          </div>
+          <div class="row justify-content-between">
+            <!-- suburb -->
+            <div class="col-sm-6 col-12">
+              <label for="suburb" class="form-label">Suburb</label>
+              <input
+                type="text"
+                placeholder="Hawthorn"
+                class="form-control"
+                required
+                v-model="address.suburb"
+                @input="checkSuburb"
+                ref="suburbInput"
+              />
+              <div v-if="errorMsg.suburb" class="text-danger">
+                {{ errorMsg.suburb }}
+              </div>
+            </div>
+            <!-- state -->
+            <div class="col-sm-6 col-12">
+              <label for="state" class="form-label">State</label>
+              <input
+                type="text"
+                placeholder="Victoria"
+                class="form-control"
+                required
+                v-model="address.state"
+                @input="checkState"
+                ref="stateInput"
+              />
+              <div v-if="errorMsg.state" class="text-danger">
+                {{ errorMsg.state }}
+              </div>
+            </div>
+          </div>
+          <div class="row justify-content-between">
+            <!-- zip code -->
+            <div class="col-sm-6 col-12">
+              <label for="post" class="form-label">Post code</label>
+              <input
+                type="text"
+                placeholder="0000"
+                maxlength="4"
+                class="form-control"
+                required
+                v-model="address.post"
+                @input="checkPost"
+                ref="postInput"
+              />
+              <div v-if="errorMsg.post" class="text-danger">
+                {{ errorMsg.post }}
+              </div>
+            </div>
+            <!-- country -->
+            <div class="col-sm-6 col-12">
+              <label for="country" class="form-label">Country</label>
+              <input
+                type="text"
+                placeholder="Australia"
+                class="form-control"
+                required
+                v-model="address.country"
+                @input="checkCountry"
+                ref="countryInput"
+              />
+              <div v-if="errorMsg.country" class="text-danger">
+                {{ errorMsg.country }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- End of Shipping address form -->
 
-          <!-- Payment details form -->
-          <div class="row mt-5">
-            <h2>Payment details</h2>
-            <div>
+        <!-- Payment details form -->
+        <div class="row mt-5">
+          <h2>Payment details</h2>
+          <div class="row">
+            <div class="col">
               <label for="cardname" class="form-label">Card name</label>
               <input
                 type="text"
@@ -149,24 +149,12 @@
               </div>
             </div>
           </div>
-          <div class="row justify-content-start">
-            <div class="col-sm-4 col-12 mt-3">
-              <label for="cardnumber" class="form-label">Card number</label>
-              <input
-                type="text"
-                placeholder="4123 4567 8900 5432"
-                maxlength="16"
-                class="form-control"
-                required
-                v-model="paymentDetails.cardNumber"
-                @input="checkCardNumber"
-              />
-              <div v-if="errorMsg.cardNumber" class="text-danger">
-                {{ errorMsg.cardNumber }}
-              </div>
-            </div>
-            <div class="col-auto text-start mt-5">
-              <!-- Default card image when no type is detected -->
+        </div>
+        <div class="row justify-content-start">
+          <div class="col-lg-6 col-sm-8 mt-3">
+            <label for="cardnumber" class="form-label"
+              >Card number
+
               <img
                 v-if="!paymentDetails.cardType"
                 src="../assets/icons/card.png"
@@ -196,71 +184,87 @@
                 src="../assets/icons/amex.png"
                 alt="American Express"
               />
-            </div>
-            <div class="col-sm-4 col-12 mt-3">
-              <label for="security-code" class="form-label"
-                >Security code</label
-              >
-              <input
-                type="password"
-                placeholder="000"
-                class="form-control"
-                minlength="3"
-                maxlength="3"
-                required
-                v-model="paymentDetails.cvv"
-                @input="checkCVV"
-              />
-              <div v-if="errorMsg.cvv" class="text-danger">
-                {{ errorMsg.cvv }}
-              </div>
+            </label>
+            <input
+              type="text"
+              placeholder="4123 4567 8900 5432"
+              maxlength="16"
+              class="form-control"
+              required
+              v-model="paymentDetails.cardNumber"
+              @input="checkCardNumber"
+            />
+            <div v-if="errorMsg.cardNumber" class="text-danger">
+              {{ errorMsg.cardNumber }}
             </div>
           </div>
-          <div class="row justify-content-start my-3">
-            <label for="expiration-date">Expiration date</label>
-            <div class="col-2">
-              <input
-                type="text"
-                placeholder="MM"
-                maxlength="2"
-                class="form-control"
-                required
-                v-model="paymentDetails.expiryMonth"
-                @input="checkExpiryMonth"
-              />
-              <div v-if="errorMsg.expiryMonth" class="text-danger">
-                {{ errorMsg.expiryMonth }}
-              </div>
-            </div>
-            /
-            <div class="col-2">
-              <input
-                type="text"
-                placeholder="YYYY"
-                maxlength="4"
-                class="form-control"
-                required
-                v-model="paymentDetails.expiryYear"
-                @input="checkExpiryYear"
-              />
-              <div v-if="errorMsg.expiryYear" class="text-danger">
-                {{ errorMsg.expiryYear }}
-              </div>
+        </div>
+        <div class="row justify-content-start my-3">
+          <div class="col-lg-4 col-12">
+            <label for="security-code" class="form-label">Security code</label>
+            <input
+              type="password"
+              placeholder="000"
+              class="form-control"
+              minlength="3"
+              maxlength="3"
+              required
+              v-model="paymentDetails.cvv"
+              @input="checkCVV"
+            />
+            <div v-if="errorMsg.cvv" class="text-danger">
+              {{ errorMsg.cvv }}
             </div>
           </div>
 
-          <p>
-            <a
-              href="#!"
-              data-mdb-ripple-init
-              v-bind:disabled="!formIsFilled"
-              :class="['btn', submitButtonColor]"
-              @click="submitPayment"
+          <div class="col-8">
+            <label for="expiration-date" class="form-label"
+              >Expiration date</label
             >
-              Confirm payment: $AU {{ order.totalPrice }}
-            </a>
-          </p>
-        </form>
+            <div class="row">
+              <div class="col-4">
+                <input
+                  type="text"
+                  placeholder="MM"
+                  maxlength="2"
+                  class="form-control"
+                  required
+                  v-model="paymentDetails.expiryMonth"
+                  @input="checkExpiryMonth"
+                />
+                <div v-if="errorMsg.expiryMonth" class="text-danger">
+                  {{ errorMsg.expiryMonth }}
+                </div>
+              </div>
+              /
+              <div class="col-4">
+                <input
+                  type="text"
+                  placeholder="YYYY"
+                  maxlength="4"
+                  class="form-control"
+                  required
+                  v-model="paymentDetails.expiryYear"
+                  @input="checkExpiryYear"
+                />
+                <div v-if="errorMsg.expiryYear" class="text-danger">
+                  {{ errorMsg.expiryYear }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="my-4">
+          <MDBBtn
+            color="dark"
+            :disabled="!formIsFilled"
+            :class="['btn', submitButtonColor]"
+            @click="submitPayment"
+          >
+            Confirm payment: $AU {{ order.totalPrice }}
+          </MDBBtn>
+        </div>
       </div>
       <div v-else>
         <div class="row justify-content-center">
@@ -290,13 +294,19 @@
 </template>
 
 <script>
+import { MDBBtn } from "mdb-vue-ui-kit";
+
 import axios from "axios";
 
 export default {
   name: "Payment",
   props: ["user"],
+  components: {
+    MDBBtn,
+  },
   data() {
     return {
+      canSubmit: false,
       order: {},
       address: {
         firstName: "",
@@ -330,7 +340,6 @@ export default {
         expiryMonth: null,
         expiryYear: null,
       },
-      canSubmit: false,
     };
   },
   async created() {
@@ -356,10 +365,12 @@ export default {
     },
     async submitPayment() {
       this.checkSubmit();
+
       if (!this.canSubmit) {
         alert("Please correct the errors in the form before submitting.");
         return;
       }
+
       const orderId = this.$route.params.orderId;
       const orderUpdate = {
         address: this.address,
@@ -443,8 +454,8 @@ export default {
     checkPost() {
       if (!this.address.post) {
         this.errorMsg.post = "Post code is required.";
-      } else if (!this.address.post.match(/^\d{5}$/)) {
-        this.errorMsg.post = "Post code must be exactly 5 numeric digits.";
+      } else if (!this.address.post.match(/^\d{4}$/)) {
+        this.errorMsg.post = "Post code must be exactly 4 numeric digits.";
       } else {
         this.errorMsg.post = null;
       }
@@ -548,7 +559,7 @@ export default {
     },
   },
   computed: {
-    formIsFilled: function () {
+    formIsFilled() {
       return (
         this.address.firstName &&
         this.address.lastName &&
@@ -560,11 +571,12 @@ export default {
         this.paymentDetails.cardName &&
         this.paymentDetails.cardNumber &&
         this.paymentDetails.cardType &&
-        this.paymentDetails.expiryDate &&
-        this.paymentDetails.cvv
+        this.paymentDetails.cvv &&
+        this.paymentDetails.expiryMonth &&
+        this.paymentDetails.expiryYear
       );
     },
-    submitButtonColor: function () {
+    submitButtonColor() {
       this.checkSubmit();
       if (this.formIsFilled && this.canSubmit) {
         return "btn-primary";

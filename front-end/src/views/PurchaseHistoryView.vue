@@ -23,16 +23,16 @@
           <td>
             <div v-if="order.orderStatus === 'Pending'">
               <router-link :to="'/payment/' + order.orderId">
-                <button class="btn btn-sm btn-dark">Pay</button>
+                <MDBBtn class="btn btn-sm btn-dark">Pay</MDBBtn>
               </router-link>
             </div>
             <div v-else>
-              <button
+              <MDBBtn
                 class="btn btn-sm btn-dark"
                 @click="openReviewModal(order)"
               >
                 Review
-              </button>
+              </MDBBtn>
             </div>
           </td>
         </tr>
@@ -40,16 +40,18 @@
     </table>
     <!-- Modal for submitting reviews -->
     <div v-if="displayModal" class="modal">
-      <div class="modal-content">
-        <h4>Submit a Review for Order #{{ currentOrder.orderId }}</h4>
+      <div class="modal-content my-3">
+        <h4 class="my-3">
+          Submit a Review for Order #{{ currentOrder.orderId }}
+        </h4>
         <textarea
           v-model="reviewText"
           placeholder="Type your review here..."
           rows="4"
         ></textarea>
-        <div>
-          <button @click="submitReview">Submit Review</button>
-          <button @click="closeModal">Close</button>
+        <div class="my-3">
+          <MDBBtn color="dark" @click="submitReview">Submit Review</MDBBtn>
+          <MDBBtn color="danger" @click="closeModal">Cancel</MDBBtn>
         </div>
       </div>
     </div>
@@ -57,10 +59,16 @@
 </template>
 
 <script>
+import { MDBBtn } from "mdb-vue-ui-kit";
+
 import axios from "axios";
 
 export default {
   name: "PurchaseHistoryView",
+  props: ["user"],
+  components: {
+    MDBBtn,
+  },
   data() {
     return {
       orders: [],
@@ -69,7 +77,6 @@ export default {
       displayModal: false,
     };
   },
-  props: ["user"],
   methods: {
     async loadOrders() {
       if (this.user && this.user.uid) {
