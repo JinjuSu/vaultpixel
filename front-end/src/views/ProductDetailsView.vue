@@ -37,14 +37,16 @@
               </div></router-link
             >
           </div>
-          <div class="button" @click="signIn" v-if="!user">
-            <a
-              href="#!"
-              class="btn btn-sm btn-dark button-shop"
-              data-mdb-ripple-init
-            >
-              Sign in to add to cart
-            </a>
+          <div class="button" v-if="!user">
+            <router-link :to="'/login'">
+              <a
+                href="#!"
+                class="btn btn-sm btn-dark button-shop"
+                data-mdb-ripple-init
+              >
+                Log in to add to cart
+              </a>
+            </router-link>
           </div>
         </div>
       </div>
